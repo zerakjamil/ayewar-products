@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github } from "lucide-react";
 import ayewarLogo from "@/assets/icons/ayewar-icon.png";
 
 const productLinks = [
@@ -94,18 +94,13 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-3">
             <a
-              href="#"
-              aria-label="Twitter"
-              className="w-8 h-8 rounded-full border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+              href="https://github.com/zerakjamil"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="w-8 h-8 rounded-full border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)] transition-colors"
             >
-              <Twitter size={14} />
-            </a>
-            <a
-              href="#"
-              aria-label="LinkedIn"
-              className="w-8 h-8 rounded-full border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
-            >
-              <Linkedin size={14} />
+              <Github size={14} />
             </a>
           </div>
         </div>
