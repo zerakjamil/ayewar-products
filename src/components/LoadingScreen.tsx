@@ -17,11 +17,11 @@ export default function LoadingScreen() {
       return;
     }
 
-    // Show loading screen for 2.5 seconds on first load
+    // Show loading screen for 3 seconds on first load
     const timer = setTimeout(() => {
       setIsLoading(false);
       sessionStorage.setItem("hasLoadedBefore", "true");
-    }, 2500);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -32,7 +32,7 @@ export default function LoadingScreen() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
         >
           {/* Animated logo container */}

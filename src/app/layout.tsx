@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LoadingScreen from "@/components/LoadingScreen";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,6 +22,10 @@ export const metadata: Metadata = {
     "Zidobid",
     "کوردستان",
   ],
+  icons: {
+    icon: "/ayewar-icon.png",
+    apple: "/ayewar-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +38,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <LoadingScreen />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
