@@ -84,15 +84,6 @@ export default function PhoneCarousel({ mockups }: PhoneCarouselProps) {
             {/* Glossy frame highlight */}
             <div className="absolute -inset-px rounded-[inherit] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-30" />
             
-            {/* Dynamic Island - Premium version */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[95px] sm:w-[105px] md:w-[115px] h-[30px] sm:h-[32px] md:h-[34px] bg-black rounded-full z-20 shadow-inner">
-              {/* Camera and sensors */}
-              <div className="absolute top-1/2 -translate-y-1/2 left-4 w-1.5 h-1.5 rounded-full bg-[#1c2026] ring-1 ring-[#3a3a3c]" />
-              <div className="absolute top-1/2 -translate-y-1/2 left-7 w-2.5 h-2.5 rounded-full bg-[#12141a] ring-1 ring-[#3a3a3c]">
-                <div className="absolute inset-0.5 rounded-full bg-gradient-to-br from-[#1a3a5c] to-[#0d1f33]" />
-              </div>
-            </div>
-
             {/* Screen */}
             <div className="relative w-full h-full overflow-hidden rounded-[34px] sm:rounded-[38px] md:rounded-[42px] bg-black">
               <AnimatePresence initial={false} custom={direction} mode="wait">

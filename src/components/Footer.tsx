@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Linkedin, Twitter } from "lucide-react";
+import ayewarLogo from "@/assets/icons/ayewar-icon.png";
 
 const productLinks = [
   { name: "ChessIFY", href: "/products/chessify" },
@@ -24,8 +26,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="text-xl font-bold tracking-wide text-[var(--color-text)]">
-              AYEWAR
+            <Link href="/" className="flex items-center">
+              <Image 
+                src={ayewarLogo} 
+                alt="Ayewar" 
+                width={120} 
+                height={40}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-[var(--color-text-muted)] text-sm leading-relaxed mt-4 max-w-xs">
               لە ئەیواردا، باوەڕمان بە ئەوەیە کە گەیشتن بە تەواوی توانای

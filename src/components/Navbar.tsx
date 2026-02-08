@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import ayewarLogo from "@/assets/icons/ayewar-icon.png";
 
 const navLinks = [
   { name: "سەرەتا", href: "/" },
@@ -29,8 +31,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold tracking-wide text-[var(--color-text)]">
-          AYEWAR
+        <Link href="/" className="flex items-center">
+          <Image 
+            src={ayewarLogo} 
+            alt="Ayewar" 
+            width={120} 
+            height={40}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         {/* Center nav - pill container */}

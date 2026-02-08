@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -8,11 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ئایەوار | بەرهەمەکانمان",
+  title: "ئەیوار | بەرهەمەکانمان",
   description:
-    "بەرهەمە داهێنەرانەکانی ئایەوار بۆ فێربوونی شەتڕەنج، گەشتکردن، و ژیانی خوێندکاری لە کوردستان.",
+    "بەرهەمەکانی ئەیوار بۆ فێربوونی شەتڕەنج، هات و چۆ لە کوردستان.",
   keywords: [
-    "ئایەوار",
+    "ئەیوار",
     "شەتڕەنج",
     "ChessIFY",
     "Raiders",
@@ -29,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ckb" dir="rtl">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased`}>
+        <LoadingScreen />
+        {children}
+      </body>
     </html>
   );
 }

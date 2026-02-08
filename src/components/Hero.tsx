@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import ayewarLogo from "@/assets/icons/ayewar-icon.png";
 
 export default function Hero() {
   return (
@@ -12,9 +14,24 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase"
         >
-          بەرهەمە داهێنەرانەکانی{" "}
-          <span className="text-[var(--color-accent)]">ئایەوار</span>
+          بەرهەمە داهێنەرانەکانی
         </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-6 flex justify-center"
+        >
+          <Image 
+            src={ayewarLogo} 
+            alt="Ayewar" 
+            width={180} 
+            height={60}
+            className="h-14 md:h-16 w-auto"
+            priority
+          />
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}

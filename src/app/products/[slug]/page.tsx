@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = products.find((p) => p.slug === slug);
   if (!product) return {};
   return {
-    title: `${product.nameKu} | ئایەوار`,
+    title: `${product.nameKu} | ئەیوار`,
     description: product.description,
   };
 }
@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-6 text-[var(--color-text)]">
               {product.nameKu}
             </h1>
-            <p className="text-[var(--color-text-muted)] text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[var(--color-text-muted)] text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-justify">
               {product.fullDescription}
             </p>
           </AnimatedSection>
@@ -87,7 +87,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
+                    <p className="text-[var(--color-text-muted)] text-sm leading-relaxed text-justify">
                       {feature.description}
                     </p>
                   </div>
@@ -105,7 +105,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
                   {product.features[3].title}
                 </h3>
-                <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
+                <p className="text-[var(--color-text-muted)] text-sm leading-relaxed text-justify">
                   {product.features[3].description}
                 </p>
               </div>
@@ -183,7 +183,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <span className="text-[var(--color-accent)] text-sm font-medium">
               ڕوونمای ئەپلیکەیشن
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-3 text-[var(--color-text)]">
+            <h2 className="text-2xl md:text-3xl font-bold mt-3 text-[var(--color-text)] text-justify max-w-3xl mx-auto">
               نموونەی ڕووکارەکانی ئەپلیکەیشن کە لەلایەن تیمەکەمانەوە گەشەی پێدراوە
             </h2>
           </AnimatedSection>

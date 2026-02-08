@@ -38,7 +38,7 @@ export default function ContactPage() {
                   پەیوەندیمان پێوە بکە
                 </span>
                 <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-3 text-[var(--color-text)]">
-                  پرۆژەیەکت هەیە، پشتگیری پێویستە، یان دەتەوێت زیاتر بزانیت؟ ئێمە لێرەین بۆ یارمەتیدان.
+                  پرۆژەیەکت هەیە، پشتگیری پێویستە، یان دەتەوێت زیاتر بزانیت؟ ئێمە لێرەین بۆ یارمەتیدانت.
                 </h1>
               </div>
 
