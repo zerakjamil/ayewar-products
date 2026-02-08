@@ -26,10 +26,10 @@ export default function CTASection() {
               {/* Content */}
               <div className="flex-1 p-10 md:p-16 text-center md:text-right">
                 <span className="text-[var(--color-accent)] text-sm font-medium">
-                  هاوکاری لەگەڵ ئێمە
+                  هاوکاربە لەگەڵ ئێمە
                 </span>
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-3 mb-6 text-[var(--color-text)]">
-                  ئامادەیت بۆ باشترکردنی گەشەی کارەکانت؟
+                  ئامادەیت بۆ باشترکردنی کارەکانت؟
                 </h2>
                 <Link
                   href="/contact"

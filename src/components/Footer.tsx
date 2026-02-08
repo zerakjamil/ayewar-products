@@ -28,7 +28,7 @@ export default function Footer() {
               AYEWAR
             </Link>
             <p className="text-[var(--color-text-muted)] text-sm leading-relaxed mt-4 max-w-xs">
-              لە ئایەواردا، باوەڕمان بە ئەوەیە کە گەیشتن بە تەواوی توانای
+              لە ئەیواردا، باوەڕمان بە ئەوەیە کە گەیشتن بە تەواوی توانای
               داهێنەرانەت پێویستی بە کاری سەخت، دڵسۆزی، و داهێنان هەیە.
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-14 pt-6 border-t border-[var(--color-border)] flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[var(--color-text-muted)] text-sm">
-            © ٢٠٢٦ ئایەوار - هەموو مافەکان پارێزراوە.
+            © ٢٠٢٦ ئەیوار - هەموو مافەکان پارێزراوە.
           </p>
           <div className="flex items-center gap-3">
             <a
