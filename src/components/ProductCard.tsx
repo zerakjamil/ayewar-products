@@ -31,23 +31,23 @@ export default function ProductCard({
 
   return (
     <AnimatedSection delay={0.1}>
-      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden">
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl sm:rounded-2xl overflow-hidden">
         <div className={`flex flex-col ${isReversed ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
-          <div className="flex-1 p-8 md:p-12 lg:p-14 flex flex-col justify-center">
-            <div className="flex items-center gap-3 mb-5">
-              <Image src={icon} alt={name} width={44} height={44} className="rounded-xl" />
-              <span className="text-[var(--color-accent)] text-sm font-medium">{category}</span>
+          <div className="flex-1 p-6 sm:p-8 md:p-12 lg:p-14 flex flex-col justify-center">
+            <div className="flex items-center gap-3 mb-4 sm:mb-5">
+              <Image src={icon} alt={name} width={44} height={44} className="rounded-xl w-10 h-10 sm:w-11 sm:h-11" />
+              <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">{category}</span>
             </div>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-5 text-[var(--color-text)]">{nameKu}</h3>
-            <p className="text-[var(--color-text-muted)] leading-relaxed mb-8 text-[15px] max-w-lg">{description}</p>
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-5 text-[var(--color-text)] leading-tight">{nameKu}</h3>
+            <p className="text-[var(--color-text-muted)] leading-relaxed mb-6 sm:mb-8 text-sm sm:text-[15px] max-w-lg">{description}</p>
             <div>
-              <Link href={`/products/${slug}`} className="inline-flex items-center gap-2 text-sm font-medium border border-[var(--color-border)] px-6 py-3 rounded-full text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors">
+              <Link href={`/products/${slug}`} className="inline-flex items-center gap-2 text-sm font-medium border border-[var(--color-border)] px-5 sm:px-6 py-3 rounded-full text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors touch-manipulation">
                 زیاتر بخوێنەرەوە
                 <ArrowLeft size={14} />
               </Link>
             </div>
           </div>
-          <div className="flex-1 py-10 px-6 flex items-center justify-center bg-[var(--color-bg-secondary)]/30">
+          <div className="flex-1 py-8 sm:py-10 px-4 sm:px-6 flex items-center justify-center bg-[var(--color-bg-secondary)]/30">
             {mockups.length > 0 ? (
               <PhoneCarousel mockups={mockups} />
             ) : (

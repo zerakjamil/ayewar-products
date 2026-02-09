@@ -29,7 +29,7 @@ export default function Navbar() {
         scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)]" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image 
@@ -37,7 +37,7 @@ export default function Navbar() {
             alt="Ayewar" 
             width={120} 
             height={40}
-            className="h-10 w-auto"
+            className="h-8 sm:h-10 w-auto"
             priority
           />
         </Link>
@@ -68,9 +68,10 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-[var(--color-text)] p-2"
+          className="md:hidden text-[var(--color-text)] p-2 touch-manipulation"
+          aria-label="Toggle menu"
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -83,13 +84,13 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]"
           >
-            <div className="px-6 py-4 flex flex-col gap-1">
+            <div className="px-4 sm:px-6 py-4 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] py-3 text-sm transition-colors"
+                  className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] py-4 text-base transition-colors touch-manipulation"
                 >
                   {link.name}
                 </Link>
@@ -97,7 +98,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="bg-[var(--color-accent)] text-white px-6 py-3 rounded-full text-sm font-medium text-center mt-2"
+                className="bg-[var(--color-accent)] text-white px-6 py-4 rounded-full text-base font-medium text-center mt-2 touch-manipulation"
               >
                 پەیوەندی
               </Link>

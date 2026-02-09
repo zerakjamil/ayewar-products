@@ -17,16 +17,16 @@ export default function ProductsPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 md:pt-44 md:pb-28">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <section className="pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <AnimatedSection>
-            <span className="text-[var(--color-accent)] text-sm font-medium">
+            <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">
               بەرهەمەکانمان
             </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-6 text-[var(--color-text)]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-2 sm:mt-3 mb-5 sm:mb-6 text-[var(--color-text)] leading-tight">
               بەرهەمە داهێنەرانەکانی ئەیوار
             </h1>
-            <p className="text-[var(--color-text-muted)] text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[var(--color-text-muted)] text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-2">
               کۆمەڵەیەک بەرهەمی پێشکەوتوو کە دروستکراون بۆ دابینکردنی پێداویستیی جۆراوجۆری بەکارهێنەران لە دونیای دیجیتاڵی ئەمڕۆ.
             </p>
           </AnimatedSection>
@@ -34,18 +34,18 @@ export default function ProductsPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 md:gap-8">
             {products.map((product, i) => (
               <AnimatedSection key={product.slug} delay={i * 0.1}>
                 <Link
                   href={`/products/${product.slug}`}
-                  className="group block bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden hover:border-[var(--color-accent)] transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-accent)]/10"
+                  className="group block bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl sm:rounded-2xl overflow-hidden hover:border-[var(--color-accent)] transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-accent)]/10 touch-manipulation"
                 >
                   {/* Product Header */}
-                  <div className="p-8 pb-6">
-                    <div className="flex items-start gap-4">
+                  <div className="p-5 sm:p-8 pb-4 sm:pb-6">
+                    <div className="flex items-start gap-3 sm:gap-4">
                       {/* Icon */}
                       <div className="flex-shrink-0">
                         <Image
@@ -53,7 +53,7 @@ export default function ProductsPage() {
                           alt={product.nameKu}
                           width={64}
                           height={64}
-                          className="rounded-xl"
+                          className="rounded-xl w-14 h-14 sm:w-16 sm:h-16"
                         />
                       </div>
 
@@ -62,10 +62,10 @@ export default function ProductsPage() {
                         <span className="text-xs text-[var(--color-accent)] font-medium">
                           {product.category}
                         </span>
-                        <h3 className="text-xl md:text-2xl font-bold text-[var(--color-text)] mt-1 mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[var(--color-text)] mt-1 mb-2 group-hover:text-[var(--color-accent)] transition-colors leading-tight">
                           {product.nameKu}
                         </h3>
-                        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
+                        <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
                           {product.description}
                         </p>
                       </div>
@@ -73,18 +73,18 @@ export default function ProductsPage() {
                   </div>
 
                   {/* Technologies */}
-                  <div className="px-8 pb-8">
+                  <div className="px-5 sm:px-8 pb-5 sm:pb-8">
                     <div className="flex flex-wrap gap-2">
                       {product.technologies.slice(0, 4).map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-full text-xs text-[var(--color-text-muted)]"
+                          className="px-2.5 sm:px-3 py-1 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-full text-xs text-[var(--color-text-muted)]"
                         >
                           {tech}
                         </span>
                       ))}
                       {product.technologies.length > 4 && (
-                        <span className="px-3 py-1 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-full text-xs text-[var(--color-text-muted)]">
+                        <span className="px-2.5 sm:px-3 py-1 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-full text-xs text-[var(--color-text-muted)]">
                           +{product.technologies.length - 4}
                         </span>
                       )}
@@ -93,7 +93,7 @@ export default function ProductsPage() {
 
                   {/* Preview Image - if available */}
                   {product.mockups.length > 0 && (
-                    <div className="relative h-64 bg-[var(--color-bg-secondary)] overflow-hidden">
+                    <div className="relative h-48 sm:h-56 md:h-64 bg-[var(--color-bg-secondary)] overflow-hidden">
                       <Image
                         src={product.mockups[0]}
                         alt={product.nameKu}

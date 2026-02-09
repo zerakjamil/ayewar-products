@@ -17,3 +17,13 @@
 
 ✓ Starting...
 ✓ Ready in 1818ms
+
+> ayewar-products@0.1.0 start
+> next start
+
+▲ Next.js 16.1.6
+- Local:         http://localhost:8012
+- Network:       http://192.168.100.14:8012
+
+✓ Starting...
+✓ Ready in 337ms

@@ -6,10 +6,10 @@ import AnimatedSection from "./AnimatedSection";
 
 export default function CTASection() {
   return (
-    <section className="py-20 md:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="py-16 sm:py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
-          <div className="relative bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden">
+          <div className="relative bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl sm:rounded-2xl overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
               {/* Left image area */}
               <div className="hidden md:block md:w-2/5 h-64 md:h-auto relative">
@@ -24,16 +24,16 @@ export default function CTASection() {
               </div>
 
               {/* Content */}
-              <div className="flex-1 p-10 md:p-16 text-center md:text-right">
-                <span className="text-[var(--color-accent)] text-sm font-medium">
+              <div className="flex-1 p-8 sm:p-10 md:p-16 text-center md:text-right">
+                <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">
                   هاوکاربە لەگەڵ ئێمە
                 </span>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-3 mb-6 text-[var(--color-text)]">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-2 sm:mt-3 mb-5 sm:mb-6 text-[var(--color-text)] leading-tight">
                   ئامادەیت بۆ باشترکردنی کارەکانت؟
                 </h2>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 border border-[var(--color-border)] text-[var(--color-text)] px-8 py-3 rounded-full text-sm font-medium hover:bg-[var(--color-bg-secondary)] transition-colors"
+                  className="inline-flex items-center gap-2 border border-[var(--color-border)] text-[var(--color-text)] px-6 sm:px-8 py-3 rounded-full text-sm font-medium hover:bg-[var(--color-bg-secondary)] transition-colors touch-manipulation"
                 >
                   پەیوەندیمان پێوە بکە
                   <ArrowLeft size={14} />

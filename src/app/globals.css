@@ -21,9 +21,31 @@ body {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   direction: rtl;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile viewport optimization */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Prevents zoom on focus in iOS */
+  }
+}
+
+/* Ensure touch targets are at least 44x44px on mobile */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+/* Mobile-specific scrollbar (hide on mobile) */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar { width: 0px; }
+}

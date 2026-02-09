@@ -21,18 +21,18 @@ const companyLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] mt-20 md:mt-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
+    <footer className="border-t border-[var(--color-border)] mt-16 sm:mt-20 md:mt-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
           {/* Brand */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center">
               <Image 
                 src={ayewarLogo} 
                 alt="Ayewar" 
                 width={120} 
                 height={40}
-                className="h-10 w-auto"
+                className="h-8 sm:h-10 w-auto"
               />
             </Link>
             <p className="text-[var(--color-text-muted)] text-sm leading-relaxed mt-4 max-w-xs">
@@ -88,8 +88,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-14 pt-6 border-t border-[var(--color-border)] flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[var(--color-text-muted)] text-sm">
+        <div className="mt-10 sm:mt-14 pt-5 sm:pt-6 border-t border-[var(--color-border)] flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[var(--color-text-muted)] text-xs sm:text-sm text-center md:text-right">
             © ٢٠٢٦ ئەیوار - هەموو مافەکان پارێزراوە.
           </p>
           <div className="flex items-center gap-3">
