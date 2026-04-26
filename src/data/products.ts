@@ -45,7 +45,6 @@ export interface Product {
   icon: StaticImageData;
   mockups: StaticImageData[];
   features: { title: string; description: string }[];
-  technologies: string[];
   services: string[];
 }
 
@@ -80,7 +79,6 @@ export const products: Product[] = [
         description: "شەتڕەنجەکەت بەڕێوەببە لە مۆبایلەکەتەوە. ئۆنلاین و ئۆفلاین یاری بکە",
       },
     ],
-    technologies: ["Unity", "C#", "Laravel API", "Python (for chess engine)", "postgreSQL","Socket.IO"],
     services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
   },
   {
@@ -113,7 +111,6 @@ export const products: Product[] = [
         description: "ئامارەکانی گەشتەکانت لە ڕاستەوخۆدا ببینە و بەڕێوەی ببە",
       },
     ],
-    technologies: ["Expo", "React Native", "PHP", "Laravel", "Python", "PostgreSQL"],
     services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
   },
   {
@@ -146,7 +143,6 @@ export const products: Product[] = [
         description: "پەیوەندی ڕاستەوخۆ لەگەڵ شۆفێرەکەت بگرە",
       },
     ],
-    technologies: ["Expo", "React Native", "PHP", "Laravel", "Python", "PostgreSQL"],
     services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
   },
   {
@@ -179,7 +175,6 @@ export const products: Product[] = [
         description: "ئاگادارکردنەوە لەسەر نوێکاریەکانی مزادەکان",
       },
     ],
-    technologies: ["Expo", "React Native", "PHP", "Laravel", "Python", "PostgreSQL","Node.js"],
     services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
   },
 ];

@@ -114,26 +114,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Technology Used */}
-      <section className="py-12 sm:py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="text-center mb-8 sm:mb-10">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--color-text)]">
-              تەکنەلۆجیای بەکارهاتوو
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16">
-              {product.technologies.map((tech) => (
-                <span key={tech} className="text-lg sm:text-xl md:text-2xl font-bold text-[var(--color-text)] opacity-70">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* Services Provided */}
       <section className="py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">

@@ -72,25 +72,6 @@ export default function ProductsPage() {
                     </div>
                   </div>
 
-                  {/* Technologies */}
-                  <div className="px-5 sm:px-8 pb-5 sm:pb-8">
-                    <div className="flex flex-wrap gap-2">
-                      {product.technologies.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2.5 sm:px-3 py-1 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-full text-xs text-[var(--color-text-muted)]"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {product.technologies.length > 4 && (
-                        <span className="px-2.5 sm:px-3 py-1 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-full text-xs text-[var(--color-text-muted)]">
-                          +{product.technologies.length - 4}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
                   {/* Preview Image - if available */}
                   {product.mockups.length > 0 && (
                     <div className="relative h-48 sm:h-56 md:h-64 bg-[var(--color-bg-secondary)] overflow-hidden">
