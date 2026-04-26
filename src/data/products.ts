@@ -1,21 +1,21 @@
 import { StaticImageData } from "next/image";
 
 // App icons
-import chessifyIcon from "@/assets/icons/ayewar-chessify-icon.png";
+import chessmacnerIcon from "@/assets/icons/ayewar-chessmacner-icon.png";
 import raidersIcon from "@/assets/icons/ayewar-raiders-icon.png";
 import studentsIcon from "@/assets/icons/ayewar-students-icon.png";
 import zidobidIcon from "@/assets/icons/ayewar-zidobid-icon.png";
 
-// ChessIFY mockups
-import chessify1 from "@/assets/mockup/chessify/mockup-1.png";
-import chessify2 from "@/assets/mockup/chessify/mockup-2.png";
-import chessify3 from "@/assets/mockup/chessify/mockup-3.png";
-import chessify4 from "@/assets/mockup/chessify/mockup-4.png";
-import chessify5 from "@/assets/mockup/chessify/mockup-5.png";
-import chessify6 from "@/assets/mockup/chessify/mockup-6.png";
-import chessify7 from "@/assets/mockup/chessify/mockup-7.png";
-import chessify8 from "@/assets/mockup/chessify/mockup-8.png";
-import chessify9 from "@/assets/mockup/chessify/mockup-9.png";
+// Chessmacner mockups
+import chessmacner1 from "@/assets/mockup/chessmacner/mockup-1.png";
+import chessmacner2 from "@/assets/mockup/chessmacner/mockup-2.png";
+import chessmacner3 from "@/assets/mockup/chessmacner/mockup-3.png";
+import chessmacner4 from "@/assets/mockup/chessmacner/mockup-4.png";
+import chessmacner5 from "@/assets/mockup/chessmacner/mockup-5.png";
+import chessmacner6 from "@/assets/mockup/chessmacner/mockup-6.png";
+import chessmacner7 from "@/assets/mockup/chessmacner/mockup-7.png";
+import chessmacner8 from "@/assets/mockup/chessmacner/mockup-8.png";
+import chessmacner9 from "@/assets/mockup/chessmacner/mockup-9.png";
 
 // Raiders mockups
 import raiders1 from "@/assets/mockup/raiders/mockup-1.png";
@@ -51,16 +51,16 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    slug: "chessify",
-    name: "Ayewar ChessIFY",
-    nameKu: "ئەیوار ChessIFY",
+    slug: "chessmancer",
+    name: "Ayewar Chessmancer",
+    nameKu: "ئەیوار Chessmancer",
     category: "پلاتفۆرمی فێربوونی شەتڕەنج",
-    icon: chessifyIcon,
-    mockups: [chessify1, chessify2, chessify3, chessify4, chessify5, chessify6, chessify7, chessify8, chessify9],
+    icon: chessmacnerIcon,
+    mockups: [chessmacner1, chessmacner2, chessmacner3, chessmacner4, chessmacner5, chessmacner6, chessmacner7, chessmacner8, chessmacner9],
     description:
-      "فێربوونی ستراتیژی شەتڕەنج لەگەڵ پلاتفۆرمی فێربوونی گشتگیرمان. ChessIFY تاکتیکی مەشق، شیکردنەوەی پۆزیشن، و سیستەمی هەڵسەنگاندنی ELO ی پێشکەوتوو لەخۆ دەگرێت بۆ یارمەتیدانی یاریزانانی هەموو ئاستەکان بۆ باشترکردنی یارییان.",
+      "فێربوونی ستراتیژی شەتڕەنج لەگەڵ پلاتفۆرمی فێربوونی گشتگیرمان. Chessmancer تاکتیکی مەشق، شیکردنەوەی پۆزیشن، و سیستەمی هەڵسەنگاندنی ELO ی پێشکەوتوو لەخۆ دەگرێت بۆ یارمەتیدانی یاریزانانی هەموو ئاستەکان بۆ باشترکردنی یارییان.",
     fullDescription:
-      "ئەیوار ChessIFY فێربوونی شەتڕەنج دەکاتە شتێکی ئاسان، خێرا، و کاریگەر. حسابێکی تەواو بکەرەوە ڕاستەوخۆ لە مۆبایلەکەت لە ماوەی کەمتر لە ٥ خولەکدا، بە تەواوی بەخۆڕایی. لەگەڵ ئەپلیکەیشنی ChessIFY، دەتوانیت تاکتیکەکانت فێربیت لە هەر کاتێک و لە هەر شوێنێک. مەشق بکە، کێبڕکێ بکە لەگەڵ یاریزانانی تر لە ناوخۆ و جیهاندا، و چاودێری پێشکەوتنەکەت بکە بە ئاسانی.",
+      "ئەیوار Chessmancer فێربوونی شەتڕەنج دەکاتە شتێکی ئاسان، خێرا، و کاریگەر. حسابێکی تەواو بکەرەوە ڕاستەوخۆ لە مۆبایلەکەت لە ماوەی کەمتر لە ٥ خولەکدا، بە تەواوی بەخۆڕایی. لەگەڵ ئەپلیکەیشنی Chessmancer، دەتوانیت تاکتیکەکانت فێربیت لە هەر کاتێک و لە هەر شوێنێک. مەشق بکە، کێبڕکێ بکە لەگەڵ یاریزانانی تر لە ناوخۆ و جیهاندا، و چاودێری پێشکەوتنەکەت بکە بە ئاسانی.",
     mockupColor: "#2d9bf0",
     features: [
       {

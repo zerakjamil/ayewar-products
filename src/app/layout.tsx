@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords: [
     "ئەیوار",
     "شەتڕەنج",
-    "ChessIFY",
+    "Chessmancer",
     "Raiders",
     "Students",
     "Zidobid",

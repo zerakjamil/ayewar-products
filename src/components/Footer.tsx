@@ -6,7 +6,7 @@ import { Github } from "lucide-react";
 import ayewarLogo from "@/assets/icons/ayewar-icon.png";
 
 const productLinks = [
-  { name: "ChessIFY", href: "/products/chessify" },
+  { name: "Chessmancer", href: "/products/chessmancer" },
   { name: "Raiders", href: "/products/raiders" },
   { name: "Students", href: "/products/students" },
   { name: "Zidobid", href: "/products/zidobid" },
