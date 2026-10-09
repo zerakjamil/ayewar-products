@@ -1266,3 +1266,13 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 
 ✓ Starting...
 ✓ Ready in 349ms
+
+> ayewar-products@0.1.0 start
+> next start
+
+▲ Next.js 16.1.6
+- Local:         http://localhost:8012
+- Network:       http://192.168.2.2:8012
+
+✓ Starting...
+✓ Ready in 452ms

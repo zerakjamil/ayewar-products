@@ -66,8 +66,6 @@ export default function Home() {
               index={index}
               badge={product.badge}
               tagline={product.tagline}
-              techStack={product.techStack}
-              metrics={product.metrics}
               mockupColor={product.mockupColor}
             />
           ))}

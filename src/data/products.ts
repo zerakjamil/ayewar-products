@@ -65,11 +65,6 @@ import zidobid5 from "@/assets/mockup/zidobid/mockup-5.png";
 import zidobid6 from "@/assets/mockup/zidobid/mockup-6.png";
 import zidobid7 from "@/assets/mockup/zidobid/mockup-7.png";
 
-export interface ProductMetric {
-  label: string;
-  value: string;
-}
-
 export interface Product {
   slug: string;
   name: string;
@@ -77,8 +72,6 @@ export interface Product {
   category: string;
   badge: string;
   tagline: string;
-  techStack: string[];
-  metrics: ProductMetric[];
   description: string;
   fullDescription: string;
   mockupColor: string;
@@ -96,12 +89,6 @@ export const products: Product[] = [
     category: "پلاتفۆرمی فێربوون و ڕاهێنانی شەتڕەنج",
     badge: "AI & Tactics Engine",
     tagline: "ڕاهێنانی زیرەکی شەتڕەنج و شیکاری پۆزیشن بە ئەلگۆریتمی پێشکەوتوو",
-    techStack: ["React Native", "Expo", "Stockfish AI", "Socket.io", "Laravel", "TypeScript"],
-    metrics: [
-      { label: "تاکتیکی ئامادەکراو", value: "10,000+" },
-      { label: "سیستەمی ELO", value: "ڕاستەوخۆ" },
-      { label: "شییکاری بزوێنەر", value: "< 50ms" },
-    ],
     icon: chessmacnerIcon,
     mockups: [
       chessmacner1,
@@ -137,7 +124,7 @@ export const products: Product[] = [
         description: "شەتڕەنجەکەت بەڕێوەببە لە مۆبایلەکەتەوە. ئۆنلاین و ئۆفلاین یاری بکە",
       },
     ],
-    services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
+    services: ["دیزاینی UI/UX و پرۆتۆتایپ", "ئەندازیاری بزوێنەر و ژیری دەستکرد", "پەرەپێدانی تەواوەتی بەرهەم", "تاقیکردنەوە و دڵنیایی جۆری"],
   },
   {
     slug: "dallak",
@@ -146,12 +133,6 @@ export const products: Product[] = [
     category: "پلاتفۆرمی مۆدێرن بۆ حجزکردنی سەرتاشخانە و ساڵۆنەکان",
     badge: "Consumer Luxury Mobile",
     tagline: "ئەزموونێکی مۆنۆکرۆمی لوکس بۆ دۆزینەوەی سەرتاش و حجزکردنی نۆرە",
-    techStack: ["React Native", "Expo Router", "TanStack Query", "Zustand", "Laravel 13", "TypeScript"],
-    metrics: [
-      { label: "دیزاینی ڕووکار", value: "Monochrome Luxury" },
-      { label: "قۆناغەکانی حجز", value: "4 خولەک" },
-      { label: "کاتی نۆتیفیکەیشن", value: "دەستبەجێ" },
-    ],
     icon: dallakIcon,
     mockups: [
       dallak1,
@@ -187,7 +168,7 @@ export const products: Product[] = [
         description: "بەدواداچوونی نۆرە و نۆتیفیکەیشنی کاتی هاتنی کاتژمێر",
       },
     ],
-    services: ["گەشەپێدانی React Native & Expo", "دیزاینی UI/UX و ناسنامەی براند", "سیستەمی API لەسەر Laravel", "نۆتیفیکەیشنی ڕاستەوخۆ (APNs/FCM)"],
+    services: ["ئەندازیاری ئەپی مۆبایل بۆ iOS و Android", "دیزاینی ناسنامەی براند و ڕووکار", "سیستەمی نۆتیفیکەیشنی دەستبەجێ", "تەلارسازی داتابەیس و خزمەتگوزارییەکان"],
   },
   {
     slug: "dallak-partners",
@@ -196,12 +177,6 @@ export const products: Product[] = [
     category: "پلاتفۆرمی بەڕێوەبردنی سەرتاشخانە و ستۆدیۆکانی جوانکاری",
     badge: "Business CRM & Studio",
     tagline: "سیستەمی بەڕێوەبردنی کڕیاران، خشتەی کار و دارایی بۆ سەرتاشەکان",
-    techStack: ["React Native", "Expo Router", "Laravel Sanctum", "Reverb Sockets", "Zustand", "TypeScript"],
-    metrics: [
-      { label: "داشبۆردی داهات", value: "ڕاستەوخۆ" },
-      { label: "پەسەندکردنی داواکاری", value: "1 کلیک" },
-      { label: "بەڕێوەبردنی خشتە", value: "خۆکار" },
-    ],
     icon: dallakPartnersIcon,
     mockups: [
       dallakPartners1,
@@ -235,7 +210,7 @@ export const products: Product[] = [
         description: "تۆماری بەردەوامی کڕیارەکان و مێژووی سەردانیکردنیان",
       },
     ],
-    services: ["داشبۆردی کارگێڕی مۆبایل", "شیکاری داهات و دارایی", "بەڕێوەبردنی CRM کڕیاران", "هاوئاهەنگی کاتی ڕاستەوخۆ (WebSockets)"],
+    services: ["ئەپی کارگێڕی مۆبایل بۆ بزنس", "شیکاری داهات و دارایی پێشکەوتوو", "بەڕێوەبردنی CRM و کڕیاران", "هاوئاهەنگی کاتی ڕاستەوخۆ"],
   },
   {
     slug: "raiders",
@@ -244,12 +219,6 @@ export const products: Product[] = [
     category: "پلاتفۆرمی هات و چۆ بۆ شۆفێری پاسەکانی کوردستان",
     badge: "Fleet Dispatch & GIS",
     tagline: "بەڕێوەبردنی هێڵ و پاس، چاودێری نەخشە و ئابوونەی مانگانەی سەرنشینان",
-    techStack: ["React Native", "Expo", "OSRM Engine", "Nominatim GIS", "Laravel Reverb", "PostGIS"],
-    metrics: [
-      { label: "چاودێری پاس", value: "GPS Live" },
-      { label: "بزوێنەری نەخشە", value: "OSRM خود-خانەخوێ" },
-      { label: "پەیوەندی سەرنشین", value: "دەستبەجێ" },
-    ],
     icon: raidersIcon,
     mockups: [raiders1, raiders2, raiders3, raiders4, raiders5, raiders6, raiders7],
     description:
@@ -275,7 +244,7 @@ export const products: Product[] = [
         description: "ئامارەکانی گەشتەکانت لە ڕاستەوخۆدا ببینە و بەڕێوەی ببە",
       },
     ],
-    services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
+    services: ["سیستەمی چاودێری جوگرافی و GPS", "بەڕێوەبردنی بەشداریکردنی سەرنشین", "دیزاین و پرۆتۆتایپی ئەپی شۆفێر", "ئەندازیاری داتای هاتوچۆ"],
   },
   {
     slug: "students",
@@ -284,12 +253,6 @@ export const products: Product[] = [
     category: "پلاتفۆرمی هات و چۆ بۆ مووشتەریەکانی پاسەکانی کوردستان",
     badge: "Passenger Transit App",
     tagline: "بەدواداچوونی ڕاستەوخۆی پاس لەسەر نەخشە و کاتی خەمڵێنراوی گەیشتن",
-    techStack: ["React Native", "Expo", "Live Geolocation", "Laravel API", "FCM Push", "TypeScript"],
-    metrics: [
-      { label: "دۆزینەوەی پاس", value: "سەر نەخشە" },
-      { label: "کاتی گەیشتن", value: "ETA خودکار" },
-      { label: "پەیوەندی شۆفێر", value: "تەلەفۆن و کورتەنامە" },
-    ],
     icon: studentsIcon,
     mockups: [students1, students2, students3, students4, students5, students6],
     description:
@@ -315,7 +278,7 @@ export const products: Product[] = [
         description: "پەیوەندی ڕاستەوخۆ لەگەڵ شۆفێرەکەت بگرە",
       },
     ],
-    services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
+    services: ["ئەپی مۆبایلی سەرنشین بۆ قوتابیان", "سیستەمی ژماردنی کاتی گەیشتن", "دیزاینی ڕووکاری خێرا و سادە", "ئاگادارکردنەوەی جووڵەی پاس"],
   },
   {
     slug: "zidobid",
@@ -324,12 +287,6 @@ export const products: Product[] = [
     category: "ئەپلیکەیشنی مزادەی ڕاستەوخۆ و بازاڕی دیجیتاڵی",
     badge: "Real-Time Auction Engine",
     tagline: "سیستەمی پێشبڕکێی نرخی ڕاستەوخۆ بە کەمترین دواکەوتنی میلیچرکەیی",
-    techStack: ["React Native", "WebSockets", "Low-Latency Engine", "Laravel", "SQLite/Postgres", "Push Alerts"],
-    metrics: [
-      { label: "دواکەوتنی سۆکێت", value: "< 30ms" },
-      { label: "شەفافیەتی نرخ", value: "100% زیندوو" },
-      { label: "ئاگاداری کاتی", value: "دەستبەجێ" },
-    ],
     icon: zidobidIcon,
     mockups: [
       zidobid1,
@@ -363,6 +320,6 @@ export const products: Product[] = [
         description: "ئاگادارکردنەوە لەسەر نوێکاریەکانی مزادەکان",
       },
     ],
-    services: ["دۆزینەوەی پرۆژە", "UI/UX و پرۆتۆتایپ", "گەشەپێدانی تەواو", "تاقیکردنەوەی نەرمەکاڵا"],
+    services: ["ئەندازیاری سۆکێتی کاتی ڕاستەوخۆ", "سیستەمی شەفافیەت و پاراستنی مامەڵە", "دیزاینی ئەپڵیکەیشنی مزادە", "خێرایی بەرز بە کەمترین دواکەوتن"],
   },
 ];

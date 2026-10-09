@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowDown, Code2, Smartphone, Cpu, ShieldCheck } from "lucide-react";
+import { Code2, Smartphone, Cpu, ShieldCheck } from "lucide-react";
 import ayewarLogo from "@/assets/icons/ayewar-icon.png";
 
 export default function Hero() {
@@ -11,22 +10,22 @@ export default function Hero() {
     {
       icon: Smartphone,
       title: "٦ ئەپی کارای مۆبایل",
-      subtitle: "iOS و Android لەسەر React Native & Expo",
+      subtitle: "ئەزموونی پێشکەوتووی iOS و Android",
     },
     {
       icon: Cpu,
       title: "کاتی ڕاستەوخۆ و خێرا",
-      subtitle: "سۆکێت، بزوێنەری شەتڕەنج و مزادەی زیندوو",
+      subtitle: "بزوێنەری شەتڕەنج و مزادەی زیندوو",
     },
     {
       icon: Code2,
-      title: "کلاود و مایکڕۆسێرڤس",
-      subtitle: "Laravel 13، Docker، OSRM و Nominatim",
+      title: "ژێرخانی سەربەخۆ",
+      subtitle: "سێرڤەر، نەخشە و سیستەمی لۆجستیک",
     },
     {
       icon: ShieldCheck,
       title: "ئاستی بەرهەمهێنان",
-      subtitle: "ڕاستەقینە لە بازاڕ و لەسەر سێرڤەری خۆماڵی",
+      subtitle: "ڕاستەقینە لە بازاڕ و لەسەر سێرڤەر",
     },
   ];
 
@@ -44,7 +43,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] text-xs text-[var(--color-text-muted)] mb-6 shadow-sm"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>پۆرتفۆلیۆی تەلارسازی نەرمەکاڵا و بەرهەمەکان</span>
+          <span>پۆرتفۆلیۆی ئەندازیاری نەرمەکاڵا و بەرهەمەکان</span>
           <span className="text-[var(--color-border)]">|</span>
           <span className="font-semibold text-[var(--color-text)]">زێڕەک جەمیل</span>
         </motion.div>
@@ -81,7 +80,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 text-[var(--color-text-muted)] text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4"
         >
-          کۆمەڵێک ئەپڵیکەیشن و پلاتفۆرمی کارا لە بەرهەمهێناندا (Production) لە بوارەکانی هاتوچۆ و چاودێری پاس، حجزکردنی لوکس، مزادەی کاتی ڕاستەوخۆ، و شیکاری شەتڕەنج بە ژیری دەستکرد. تەواوی پرۆسەی دیزاینی ڕووکار، سیستەمی کلاود، و ئەپەکانی iOS و Android بە شێوازی سەربەخۆ ئەندازیاری کراون.
+          کۆمەڵێک ئەپڵیکەیشن و پلاتفۆرمی کارا لە بەرهەمهێناندا (Production) لە بوارەکانی هاتوچۆ و چاودێری پاس، حجزکردنی لوکس، مزادەی کاتی ڕاستەوخۆ، و شیکاری شەتڕەنج بە ژیری دەستکرد. تەواوی پرۆسەی دیزاینی ڕووکار و سیستەمەکان بە شێوازی سەربەخۆ ئەندازیاری کراون.
         </motion.p>
 
         {/* Engineering Highlights Ribbon */}

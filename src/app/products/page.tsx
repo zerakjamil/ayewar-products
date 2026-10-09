@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Layers } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,13 +22,13 @@ export default function ProductsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <AnimatedSection>
             <span className="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-accent)] inline-block mb-4">
-              ئیکۆسیستەمی تەکنەلۆجی
+              ئیکۆسیستەمی بەرهەمەکان
             </span>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-[var(--color-text)] leading-snug">
               بەرهەم و پلاتفۆرمە مۆبایلەکان
             </h1>
             <p className="text-[var(--color-text-muted)] text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mt-4 px-2">
-              تەواوی بەرهەمەکان لەسەر بنەمای تەکنەلۆژیای سەردەم و ڕووکاری پێشکەوتوو بەرهەم هێنراون، و لەسەر ئاستی بەرهەمهێنان (Production) لە کوردستان کاردەکەن.
+              تەواوی بەرهەمەکان لەسەر بنەمای ئەزموونی ڕاستەقینە و دیزاینی وردی مۆدێرن بەرهەم هێنراون، و لەسەر ئاستی بەرهەمهێنان لە کوردستان کاردەکەن.
             </p>
           </AnimatedSection>
         </div>
@@ -85,23 +85,6 @@ export default function ProductsPage() {
                     <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-3 mb-4">
                       {product.description}
                     </p>
-
-                    {/* Tech Stack Preview */}
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {product.techStack.slice(0, 3).map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-[10px] px-2 py-0.5 rounded bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-muted)] font-mono"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {product.techStack.length > 3 && (
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--color-bg-secondary)] text-[var(--color-text-muted)] font-mono">
-                          +{product.techStack.length - 3}
-                        </span>
-                      )}
-                    </div>
                   </div>
 
                   {/* Preview Image */}

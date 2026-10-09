@@ -3,13 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ChevronLeft,
-  ChevronRight,
   CheckCircle2,
-  Sparkles,
   Layers,
-  Cpu,
-  Smartphone,
-  ExternalLink,
   ArrowRight,
   ArrowLeft,
 } from "lucide-react";
@@ -107,43 +102,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <p className="text-[var(--color-text-muted)] text-base sm:text-lg md:text-xl max-w-4xl leading-relaxed text-justify">
               {product.fullDescription}
             </p>
-
-            {/* Architecture / Tech Stack pills */}
-            <div className="mt-8 pt-6 border-t border-[var(--color-border)] flex flex-wrap items-center gap-2">
-              <span className="text-xs font-semibold text-[var(--color-text-muted)] ml-2">
-                تەلارسازی و بزوێنەرەکان:
-              </span>
-              {product.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="text-xs px-3 py-1 rounded-md bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text)] font-mono"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            {/* Key Metrics */}
-            {product.metrics.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-                {product.metrics.map((m, i) => (
-                  <div
-                    key={i}
-                    className="p-4 rounded-xl bg-[var(--color-bg-card)] border border-[var(--color-border)]"
-                  >
-                    <div
-                      className="text-xl sm:text-2xl font-bold font-mono"
-                      style={{ color: product.mockupColor }}
-                    >
-                      {m.value}
-                    </div>
-                    <div className="text-xs text-[var(--color-text-muted)] mt-1 font-medium">
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </AnimatedSection>
         </div>
       </section>

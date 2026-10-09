@@ -33,8 +33,7 @@ export const metadata: Metadata = {
     "Students",
     "Zidobid",
     "کوردستان",
-    "React Native",
-    "Expo",
+    "Ayewar",
   ],
   icons: {
     icon: "/ayewar-icon.png",

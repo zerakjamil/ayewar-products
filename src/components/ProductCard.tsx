@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
-import { ArrowLeft, Sparkles, Layers } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import PhoneCarousel from "./PhoneCarousel";
-import { ProductMetric } from "@/data/products";
 
 interface ProductCardProps {
   category: string;
@@ -18,8 +17,6 @@ interface ProductCardProps {
   index: number;
   badge?: string;
   tagline?: string;
-  techStack?: string[];
-  metrics?: ProductMetric[];
   mockupColor?: string;
 }
 
@@ -34,8 +31,6 @@ export default function ProductCard({
   index,
   badge,
   tagline,
-  techStack = [],
-  metrics = [],
   mockupColor = "#38bdf8",
 }: ProductCardProps) {
   const isReversed = index % 2 !== 0;
@@ -99,45 +94,6 @@ export default function ProductCard({
               <p className="text-[var(--color-text-muted)] leading-relaxed mb-6 text-sm sm:text-[15px]">
                 {description}
               </p>
-
-              {/* Tech Stack Chips (CV Power Highlight) */}
-              {techStack.length > 0 && (
-                <div className="mb-6">
-                  <div className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] mb-2 font-medium">
-                    <Layers size={13} />
-                    <span>تەکنەلۆژیا و تەلارسازی:</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs px-2.5 py-1 rounded-md bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Real Metrics Strip */}
-              {metrics.length > 0 && (
-                <div className="grid grid-cols-3 gap-2 py-3 px-3.5 mb-6 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-                  {metrics.map((m, i) => (
-                    <div key={i} className="text-center">
-                      <div
-                        className="text-sm sm:text-base font-bold truncate"
-                        style={{ color: mockupColor }}
-                      >
-                        {m.value}
-                      </div>
-                      <div className="text-[11px] text-[var(--color-text-muted)] truncate mt-0.5">
-                        {m.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Actions */}
@@ -146,7 +102,7 @@ export default function ProductCard({
                 href={`/products/${slug}`}
                 className="inline-flex items-center gap-2 text-sm font-semibold border border-[var(--color-border)] px-6 py-3 rounded-full text-[var(--color-text)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-card-hover)] hover:border-[var(--color-border-hover)] transition-all shadow-sm"
               >
-                <span>بینینی تەواوی تایبەتمەندییەکان</span>
+                <span>زیاتر بخوێنەرەوە</span>
                 <ArrowLeft size={15} />
               </Link>
             </div>
