@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -9,28 +9,36 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: "#090c10",
+};
+
 export const metadata: Metadata = {
-  title: "ئەیوار | بەرهەمەکانمان",
+  title: "ئەیوار | پلاتفۆرم و بەرهەمە پێشکەوتووەکان",
   description:
-    "بەرهەمەکانی ئەیوار بۆ فێربوونی شەتڕەنج، هات و چۆ لە کوردستان.",
+    "ئیکۆسیستەمی تەکنەلۆجی ئەیوار — پلاتفۆرمەکانی شەتڕەنج، حجزکردنی سەرتاشخانە (Dallak)، هاتوچۆی کوردستان (Raiders & Students)، و مزادەی ڕاستەوخۆ (Zidobid).",
   keywords: [
     "ئەیوار",
+    "زێڕەک جەمیل",
     "شەتڕەنج",
     "Chessmancer",
+    "Dallak",
+    "Dallak Partners",
+    "دەللاک",
     "Raiders",
     "Students",
     "Zidobid",
     "کوردستان",
+    "React Native",
+    "Expo",
   ],
   icons: {
     icon: "/ayewar-icon.png",
     apple: "/ayewar-icon.png",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
   },
 };
 

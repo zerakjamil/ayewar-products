@@ -1,91 +1,100 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 interface PhoneCarouselProps {
   mockups: StaticImageData[];
+  accentColor?: string;
 }
 
-export default function PhoneCarousel({ mockups }: PhoneCarouselProps) {
+export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: PhoneCarouselProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  // Auto-rotate
-  useEffect(() => {
+  const next = useCallback(() => {
     if (mockups.length <= 1) return;
-    const timer = setInterval(() => {
-      setDirection(1);
-      setCurrent((prev) => (prev + 1) % mockups.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    setDirection(1);
+    setCurrent((prev) => (prev + 1) % mockups.length);
   }, [mockups.length]);
+
+  const prev = useCallback(() => {
+    if (mockups.length <= 1) return;
+    setDirection(-1);
+    setCurrent((prev) => (prev - 1 + mockups.length) % mockups.length);
+  }, [mockups.length]);
+
+  // Auto-advance when playing
+  useEffect(() => {
+    if (!isPlaying || mockups.length <= 1) return;
+    const timer = setInterval(() => {
+      next();
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [isPlaying, mockups.length, next]);
+
+  // Keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      next();
+    } else if (e.key === "ArrowRight") {
+      prev();
+    }
+  };
 
   if (!mockups || mockups.length === 0) return null;
 
-  const next = () => {
-    setDirection(1);
-    setCurrent((prev) => (prev + 1) % mockups.length);
-  };
-
-  const prev = () => {
-    setDirection(-1);
-    setCurrent((prev) => (prev - 1 + mockups.length) % mockups.length);
-  };
-
   const slideVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 100 : -100,
+      x: dir > 0 ? 80 : -80,
       opacity: 0,
-      scale: 0.9,
-      rotateY: dir > 0 ? 15 : -15,
+      scale: 0.95,
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
-      rotateY: 0,
     },
     exit: (dir: number) => ({
-      x: dir > 0 ? -100 : 100,
+      x: dir > 0 ? -80 : 80,
       opacity: 0,
-      scale: 0.9,
-      rotateY: dir > 0 ? -15 : 15,
+      scale: 0.95,
     }),
   };
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      {/* Phone container with premium glow */}
-      <motion.div 
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.3 }}
-        className="relative"
-      >
-        {/* Outer glow ring */}
-        <div className="absolute -inset-12 bg-gradient-to-b from-[var(--color-accent)]/30 via-[var(--color-accent-secondary)]/20 to-transparent rounded-[80px] blur-3xl opacity-60" />
-        
-        {/* Secondary glow */}
-        <motion.div 
-          animate={{ 
-            opacity: [0.4, 0.7, 0.4],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute -inset-6 bg-gradient-to-br from-[var(--color-accent)]/25 to-[var(--color-accent-secondary)]/15 rounded-[60px] blur-2xl"
+    <div
+      className="flex flex-col items-center gap-6 select-none"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="region"
+      aria-label="نمایشی وێنەکان بە مۆبایل"
+      onMouseEnter={() => setIsPlaying(false)}
+      onMouseLeave={() => setIsPlaying(true)}
+    >
+      {/* Phone container */}
+      <div className="relative">
+        {/* Subtle ambient light tinted with the app's brand color */}
+        <div
+          className="absolute -inset-10 rounded-[64px] blur-3xl opacity-25 pointer-events-none transition-colors duration-700"
+          style={{ backgroundColor: accentColor }}
         />
 
-        {/* Phone device */}
-        <div className="relative h-[420px] w-[210px] sm:h-[480px] sm:w-[240px] md:h-[520px] md:w-[260px]" style={{ perspective: '1000px' }}>
-          {/* Premium phone frame */}
-          <div className="absolute inset-0 rounded-[44px] sm:rounded-[50px] md:rounded-[54px] border-[10px] sm:border-[12px] border-[#1a1a1c] bg-[#1a1a1c] shadow-2xl shadow-black/50 overflow-hidden">
-            {/* Glossy frame highlight */}
-            <div className="absolute -inset-px rounded-[inherit] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-30" />
-            
-            {/* Screen */}
-            <div className="relative w-full h-full overflow-hidden rounded-[34px] sm:rounded-[38px] md:rounded-[42px] bg-black">
+        {/* Phone chassis */}
+        <div className="relative h-[440px] w-[215px] sm:h-[500px] sm:w-[245px] md:h-[540px] md:w-[265px]">
+          {/* Bezel frame */}
+          <div className="absolute inset-0 rounded-[46px] sm:rounded-[52px] md:rounded-[56px] border-[10px] sm:border-[12px] border-[#141822] bg-[#141822] shadow-2xl shadow-black/80 overflow-hidden ring-1 ring-white/10">
+            {/* Dynamic Island / pill speaker */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-4 bg-black rounded-full z-30 flex items-center justify-end px-2.5 gap-1.5 shadow-sm">
+              <div className="w-2 h-2 rounded-full bg-[#1c2438]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#2a3652]/60" />
+            </div>
+
+            {/* Screen Viewport */}
+            <div className="relative w-full h-full overflow-hidden rounded-[36px] sm:rounded-[40px] md:rounded-[44px] bg-black">
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
                   key={current}
@@ -95,80 +104,90 @@ export default function PhoneCarousel({ mockups }: PhoneCarouselProps) {
                   animate="center"
                   exit="exit"
                   transition={{
-                    x: { type: "spring", stiffness: 300, damping: 30 },
+                    x: { type: "spring", stiffness: 320, damping: 32 },
                     opacity: { duration: 0.2 },
                     scale: { duration: 0.2 },
-                    rotateY: { duration: 0.3 },
                   }}
                   className="absolute inset-0"
-                  style={{ transformStyle: 'preserve-3d' }}
                 >
                   <Image
                     src={mockups[current]}
-                    alt={`Screenshot ${current + 1}`}
+                    alt={`ڕوونمای ئەپڵیکەیشن ${current + 1}`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 640px) 210px, (max-width: 768px) 240px, 260px"
-                    priority
+                    sizes="(max-width: 640px) 215px, (max-width: 768px) 245px, 265px"
+                    priority={current === 0}
                     draggable={false}
                   />
-                  {/* Screen glare effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+                  {/* Subtle glass reflection highlight */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Home indicator - Premium style */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[105px] sm:w-[115px] h-[5px] bg-white/50 rounded-full z-20 shadow-sm" />
+            {/* Home indicator bar */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-1 bg-white/40 rounded-full z-30 pointer-events-none" />
           </div>
-          
-          {/* Reflection effect */}
-          <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full h-20 bg-gradient-to-b from-[var(--color-accent)]/10 to-transparent blur-xl opacity-50 rounded-full" />
         </div>
-      </motion.div>
+      </div>
 
-      {/* Premium Controls */}
-      <div className="flex items-center gap-5">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+      {/* Controls Bar */}
+      <div className="flex items-center gap-4 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-full px-4 py-2 shadow-lg">
+        {/* RTL: Previous slide is right arrow */}
+        <button
           onClick={prev}
           disabled={mockups.length <= 1}
-          className="w-11 h-11 rounded-full bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)]/50 hover:shadow-lg hover:shadow-[var(--color-accent)]/20 transition-all disabled:opacity-30 disabled:hover:border-[var(--color-border)] disabled:hover:shadow-none"
-          aria-label="Previous"
+          className="w-9 h-9 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30"
+          aria-label="وێنەی پێشوو"
         >
-          <ChevronRight size={18} />
-        </motion.button>
+          <ChevronRight size={16} />
+        </button>
 
-        {/* Premium Dots */}
-        <div className="flex items-center gap-2.5">
-          {mockups.map((_, i) => (
-            <motion.button
-              key={i}
-              whileHover={{ scale: 1.15 }}
-              onClick={() => {
-                setDirection(i > current ? 1 : -1);
-                setCurrent(i);
-              }}
-              className={`rounded-full transition-all duration-300 ${i === current
-                  ? "w-8 h-2.5 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] shadow-lg shadow-[var(--color-accent)]/30"
-                  : "w-2.5 h-2.5 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]"
-                }`}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
+        {/* Counter & Play/Pause */}
+        <div className="flex items-center gap-2 px-1 text-xs font-mono text-[var(--color-text-muted)]">
+          <span className="font-semibold text-[var(--color-text)]">
+            {String(current + 1).padStart(2, "0")}
+          </span>
+          <span>/</span>
+          <span>{String(mockups.length).padStart(2, "0")}</span>
+
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors ml-1"
+            aria-label={isPlaying ? "وەستاندنی خۆکار" : "دەستپێکردنی خۆکار"}
+          >
+            {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+          </button>
         </div>
 
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+        {/* RTL: Next slide is left arrow */}
+        <button
           onClick={next}
           disabled={mockups.length <= 1}
-          className="w-11 h-11 rounded-full bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)]/50 hover:shadow-lg hover:shadow-[var(--color-accent)]/20 transition-all disabled:opacity-30 disabled:hover:border-[var(--color-border)] disabled:hover:shadow-none"
-          aria-label="Next"
+          className="w-9 h-9 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30"
+          aria-label="وێنەی دواتر"
         >
-          <ChevronLeft size={18} />
-        </motion.button>
+          <ChevronLeft size={16} />
+        </button>
+      </div>
+
+      {/* Thumbnails dots */}
+      <div className="flex items-center gap-1.5 flex-wrap justify-center max-w-xs">
+        {mockups.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              setDirection(i > current ? 1 : -1);
+              setCurrent(i);
+            }}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === current
+                ? "w-6 bg-[var(--color-text)] shadow-sm"
+                : "w-2 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]"
+            }`}
+            aria-label={`بڕۆ بۆ وێنەی ${i + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

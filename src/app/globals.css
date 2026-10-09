@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #0d1117;
-  --color-bg-secondary: #161b22;
-  --color-bg-card: #1c2128;
-  --color-accent: #2d9bf0;
-  --color-text: #e6edf3;
-  --color-text-muted: #8b949e;
-  --color-border: #30363d;
+  --color-bg: #090c10;
+  --color-bg-secondary: #0f141c;
+  --color-bg-card: #151b26;
+  --color-bg-card-hover: #1a2232;
+  --color-accent: #38bdf8;
+  --color-accent-secondary: #818cf8;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-border: #1e2638;
+  --color-border-hover: #2e3a54;
   --font-sans: var(--font-inter);
 }
 
@@ -18,34 +21,44 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   direction: rtl;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
 }
 
-/* Mobile viewport optimization */
+/* Accessible focus ring on all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Interactive touch targets >= 44x44px */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
 @media (max-width: 768px) {
-  body {
-    font-size: 16px; /* Prevents zoom on focus in iOS */
+  ::-webkit-scrollbar {
+    width: 0px;
   }
-}
-
-/* Ensure touch targets are at least 44x44px on mobile */
-@media (max-width: 768px) {
-  button, a {
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
-
-/* Mobile-specific scrollbar (hide on mobile) */
-@media (max-width: 768px) {
-  ::-webkit-scrollbar { width: 0px; }
 }
