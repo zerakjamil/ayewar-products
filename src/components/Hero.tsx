@@ -30,29 +30,16 @@ export default function Hero() {
   ];
 
   return (
-    <section className="pt-28 pb-12 sm:pt-36 sm:pb-16 md:pt-44 md:pb-20 relative overflow-hidden">
+    <section className="pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20 relative overflow-hidden">
       {/* Background radial warmth - subtle, non-slop */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--color-accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        {/* Creator / Organization Badge */}
+        {/* Brand Logo */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] text-xs text-[var(--color-text-muted)] mb-6 shadow-sm"
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>پۆرتفۆلیۆی ئەندازیاری نەرمەکاڵا و بەرهەمەکان</span>
-          <span className="text-[var(--color-border)]">|</span>
-          <span className="font-semibold text-[var(--color-text)]">زێڕەک جەمیل</span>
-        </motion.div>
-
-        {/* Brand Logo & Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
           className="flex justify-center mb-6"
         >
           <Image
@@ -68,7 +55,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] leading-snug max-w-4xl mx-auto"
         >
           بەرهەمە داهێنەرانە و پلاتفۆرمە مۆبایلە پێشکەوتووەکان
@@ -77,7 +64,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-6 text-[var(--color-text-muted)] text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4"
         >
           کۆمەڵێک ئەپڵیکەیشن و پلاتفۆرمی کارا لە بەرهەمهێناندا (Production) لە بوارەکانی هاتوچۆ و چاودێری پاس، حجزکردنی لوکس، مزادەی کاتی ڕاستەوخۆ، و شیکاری شەتڕەنج بە ژیری دەستکرد. تەواوی پرۆسەی دیزاینی ڕووکار و سیستەمەکان بە شێوازی سەربەخۆ ئەندازیاری کراون.
@@ -87,7 +74,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mt-10 sm:mt-12 text-right"
         >
           {highlights.map((h, i) => {

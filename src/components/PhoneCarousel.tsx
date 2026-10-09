@@ -67,7 +67,7 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
 
   return (
     <div
-      className="flex flex-col items-center gap-6 select-none"
+      className="flex flex-col items-center gap-5 select-none"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
@@ -79,7 +79,7 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
       <div className="relative">
         {/* Subtle ambient light tinted with the app's brand color */}
         <div
-          className="absolute -inset-10 rounded-[64px] blur-3xl opacity-25 pointer-events-none transition-colors duration-700"
+          className="absolute -inset-8 rounded-[64px] blur-3xl opacity-20 pointer-events-none transition-colors duration-700"
           style={{ backgroundColor: accentColor }}
         />
 
@@ -132,31 +132,31 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
       </div>
 
       {/* Controls Bar */}
-      <div className="flex items-center gap-4 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-full px-4 py-2 shadow-lg">
+      <div className="flex items-center gap-3 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-full px-3.5 py-1.5 shadow-lg">
         {/* RTL: Previous slide is right arrow */}
         <button
           onClick={prev}
           disabled={mockups.length <= 1}
-          className="w-9 h-9 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30"
+          className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30 p-0"
           aria-label="وێنەی پێشوو"
         >
-          <ChevronRight size={16} />
+          <ChevronRight size={15} />
         </button>
 
         {/* Counter & Play/Pause */}
-        <div className="flex items-center gap-2 px-1 text-xs font-mono text-[var(--color-text-muted)]">
+        <div className="flex items-center gap-1.5 px-1 text-xs font-mono text-[var(--color-text-muted)]">
           <span className="font-semibold text-[var(--color-text)]">
             {String(current + 1).padStart(2, "0")}
           </span>
-          <span>/</span>
-          <span>{String(mockups.length).padStart(2, "0")}</span>
+          <span className="opacity-40">/</span>
+          <span className="opacity-60">{String(mockups.length).padStart(2, "0")}</span>
 
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors ml-1"
+            className="p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors ml-0.5"
             aria-label={isPlaying ? "وەستاندنی خۆکار" : "دەستپێکردنی خۆکار"}
           >
-            {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+            {isPlaying ? <Pause size={11} /> : <Play size={11} />}
           </button>
         </div>
 
@@ -164,15 +164,15 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
         <button
           onClick={next}
           disabled={mockups.length <= 1}
-          className="w-9 h-9 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30"
+          className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30 p-0"
           aria-label="وێنەی دواتر"
         >
-          <ChevronLeft size={16} />
+          <ChevronLeft size={15} />
         </button>
       </div>
 
-      {/* Thumbnails dots */}
-      <div className="flex items-center gap-1.5 flex-wrap justify-center max-w-xs">
+      {/* Micro Progress Bar / Tiny Indicator Dashes */}
+      <div className="flex items-center gap-1 justify-center">
         {mockups.map((_, i) => (
           <button
             key={i}
@@ -180,10 +180,10 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
               setDirection(i > current ? 1 : -1);
               setCurrent(i);
             }}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
+            className={`h-1 rounded-full transition-all duration-300 p-0 border-0 outline-none block ${
               i === current
-                ? "w-6 bg-[var(--color-text)] shadow-sm"
-                : "w-2 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]"
+                ? "w-4 bg-[var(--color-text)]"
+                : "w-1.5 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]"
             }`}
             aria-label={`بڕۆ بۆ وێنەی ${i + 1}`}
           />
