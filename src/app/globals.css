@@ -63,3 +63,24 @@ html[dir="ltr"], body[dir="ltr"], .ltr {
     width: 0px;
   }
 }
+
+/* Skeleton shimmer gradient animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite ease-in-out;
+}
