@@ -121,7 +121,7 @@ export default function ProductCard({
             }`}
           >
             {mockups.length > 0 ? (
-              <PhoneCarousel mockups={mockups} accentColor={mockupColor} />
+              <PhoneCarousel mockups={mockups} accentColor={mockupColor} appName={name} />
             ) : (
               <div className="flex items-center justify-center h-[420px]">
                 <Image

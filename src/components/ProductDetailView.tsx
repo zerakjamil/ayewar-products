@@ -119,7 +119,11 @@ export default function ProductDetailView({
 
           <AnimatedSection>
             {product.mockups.length > 0 ? (
-              <PhoneCarousel mockups={product.mockups} accentColor={product.mockupColor} />
+              <PhoneCarousel
+                mockups={product.mockups}
+                accentColor={product.mockupColor}
+                appName={content.name}
+              />
             ) : (
               <div className="flex items-center justify-center h-64">
                 <Image
