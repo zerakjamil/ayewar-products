@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import LoadingScreen from "@/components/LoadingScreen";
 import CookieConsent from "@/components/CookieConsent";
+import { LanguageProvider } from "@/i18n/context";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,7 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ئەیوار | پلاتفۆرم و بەرهەمە پێشکەوتووەکان",
+  title: "ئەیوار | پلاتفۆرم و بەرهەمە پێشکەوتووەکان | Ayewar",
   description:
     "ئیکۆسیستەمی تەکنەلۆجی ئەیوار — پلاتفۆرمەکانی شەتڕەنج، حجزکردنی سەرتاشخانە (Dallak)، هاتوچۆی کوردستان (Raiders & Students)، و مزادەی ڕاستەوخۆ (Zidobid).",
   keywords: [
@@ -47,11 +48,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ckb" dir="rtl">
+    <html lang="ckb" dir="rtl" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>
-        <LoadingScreen />
-        {children}
-        <CookieConsent />
+        <LanguageProvider>
+          <LoadingScreen />
+          {children}
+          <CookieConsent />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { useLanguage } from "@/i18n/context";
 
 interface PhoneCarouselProps {
   mockups: StaticImageData[];
@@ -14,6 +15,7 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const { dir } = useLanguage();
 
   const next = useCallback(() => {
     if (mockups.length <= 1) return;
@@ -39,17 +41,17 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
-      next();
+      dir === "rtl" ? next() : prev();
     } else if (e.key === "ArrowRight") {
-      prev();
+      dir === "rtl" ? prev() : next();
     }
   };
 
   if (!mockups || mockups.length === 0) return null;
 
   const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? 80 : -80,
+    enter: (d: number) => ({
+      x: d > 0 ? (dir === "rtl" ? -80 : 80) : (dir === "rtl" ? 80 : -80),
       opacity: 0,
       scale: 0.95,
     }),
@@ -58,8 +60,8 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
       opacity: 1,
       scale: 1,
     },
-    exit: (dir: number) => ({
-      x: dir > 0 ? -80 : 80,
+    exit: (d: number) => ({
+      x: d > 0 ? (dir === "rtl" ? 80 : -80) : (dir === "rtl" ? -80 : 80),
       opacity: 0,
       scale: 0.95,
     }),
@@ -71,21 +73,18 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
-      aria-label="نمایشی وێنەکان بە مۆبایل"
+      aria-label="Mobile Mockup Showcase"
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
     >
       {/* Phone container */}
       <div className="relative">
-        {/* Subtle ambient light tinted with the app's brand color */}
         <div
           className="absolute -inset-8 rounded-[64px] blur-3xl opacity-20 pointer-events-none transition-colors duration-700"
           style={{ backgroundColor: accentColor }}
         />
 
-        {/* Phone chassis */}
         <div className="relative h-[440px] w-[215px] sm:h-[500px] sm:w-[245px] md:h-[540px] md:w-[265px]">
-          {/* Bezel frame */}
           <div className="absolute inset-0 rounded-[46px] sm:rounded-[52px] md:rounded-[56px] border-[10px] sm:border-[12px] border-[#141822] bg-[#141822] shadow-2xl shadow-black/80 overflow-hidden ring-1 ring-white/10">
             {/* Dynamic Island / pill speaker */}
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-4 bg-black rounded-full z-30 flex items-center justify-end px-2.5 gap-1.5 shadow-sm">
@@ -112,14 +111,13 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
                 >
                   <Image
                     src={mockups[current]}
-                    alt={`ڕوونمای ئەپڵیکەیشن ${current + 1}`}
+                    alt={`App Screen ${current + 1}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 215px, (max-width: 768px) 245px, 265px"
                     priority={current === 0}
                     draggable={false}
                   />
-                  {/* Subtle glass reflection highlight */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
@@ -133,14 +131,14 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
 
       {/* Controls Bar */}
       <div className="flex items-center gap-3 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-full px-3.5 py-1.5 shadow-lg">
-        {/* RTL: Previous slide is right arrow */}
+        {/* Back button: Left in LTR, Right in RTL */}
         <button
           onClick={prev}
           disabled={mockups.length <= 1}
           className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30 p-0"
-          aria-label="وێنەی پێشوو"
+          aria-label="Previous screen"
         >
-          <ChevronRight size={15} />
+          {dir === "rtl" ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
         </button>
 
         {/* Counter & Play/Pause */}
@@ -154,20 +152,20 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
           <button
             onClick={() => setIsPlaying(!isPlaying)}
             className="p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors ml-0.5"
-            aria-label={isPlaying ? "وەستاندنی خۆکار" : "دەستپێکردنی خۆکار"}
+            aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
           >
             {isPlaying ? <Pause size={11} /> : <Play size={11} />}
           </button>
         </div>
 
-        {/* RTL: Next slide is left arrow */}
+        {/* Forward button: Right in LTR, Left in RTL */}
         <button
           onClick={next}
           disabled={mockups.length <= 1}
           className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30 p-0"
-          aria-label="وێنەی دواتر"
+          aria-label="Next screen"
         >
-          <ChevronLeft size={15} />
+          {dir === "rtl" ? <ChevronLeft size={15} /> : <ChevronRight size={15} />}
         </button>
       </div>
 
@@ -185,7 +183,7 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
                 ? "w-4 bg-[var(--color-text)]"
                 : "w-1.5 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]"
             }`}
-            aria-label={`بڕۆ بۆ وێنەی ${i + 1}`}
+            aria-label={`Go to screen ${i + 1}`}
           />
         ))}
       </div>

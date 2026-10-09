@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import PhoneCarousel from "./PhoneCarousel";
+import { useLanguage } from "@/i18n/context";
 
 interface ProductCardProps {
   category: string;
   name: string;
-  nameKu: string;
+  nameSub?: string;
   description: string;
   slug: string;
   icon: StaticImageData;
@@ -23,7 +24,7 @@ interface ProductCardProps {
 export default function ProductCard({
   category,
   name,
-  nameKu,
+  nameSub,
   description,
   slug,
   icon,
@@ -34,6 +35,7 @@ export default function ProductCard({
   mockupColor = "#38bdf8",
 }: ProductCardProps) {
   const isReversed = index % 2 !== 0;
+  const { t, dir } = useLanguage();
 
   return (
     <AnimatedSection delay={0.1}>
@@ -78,11 +80,13 @@ export default function ProductCard({
               {/* Title & Tagline */}
               <div className="mb-4">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--color-text)] leading-snug">
-                  {nameKu}
-                </h3>
-                <p className="text-xs sm:text-sm text-[var(--color-text-muted)] font-mono mt-1">
                   {name}
-                </p>
+                </h3>
+                {nameSub && (
+                  <p className="text-xs sm:text-sm text-[var(--color-text-muted)] font-mono mt-1">
+                    {nameSub}
+                  </p>
+                )}
                 {tagline && (
                   <p className="text-sm sm:text-base font-medium text-[var(--color-text)]/90 mt-2">
                     {tagline}
@@ -102,14 +106,20 @@ export default function ProductCard({
                 href={`/products/${slug}`}
                 className="inline-flex items-center gap-2 text-sm font-semibold border border-[var(--color-border)] px-6 py-3 rounded-full text-[var(--color-text)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-card-hover)] hover:border-[var(--color-border-hover)] transition-all shadow-sm"
               >
-                <span>زیاتر بخوێنەرەوە</span>
-                <ArrowLeft size={15} />
+                <span>{t.card.readMore}</span>
+                {dir === "ltr" ? <ArrowRight size={15} /> : <ArrowLeft size={15} />}
               </Link>
             </div>
           </div>
 
           {/* Phone Mockup Showcase */}
-          <div className="flex-1 py-10 sm:py-12 px-4 sm:px-8 flex items-center justify-center bg-[var(--color-bg-secondary)]/50 border-t lg:border-t-0 lg:border-r border-[var(--color-border)]">
+          <div
+            className={`flex-1 py-10 sm:py-12 px-4 sm:px-8 flex items-center justify-center bg-[var(--color-bg-secondary)]/50 border-t lg:border-t-0 border-[var(--color-border)] ${
+              isReversed
+                ? "rtl:lg:border-r-0 rtl:lg:border-l ltr:lg:border-l-0 ltr:lg:border-r"
+                : "rtl:lg:border-r ltr:lg:border-l"
+            }`}
+          >
             {mockups.length > 0 ? (
               <PhoneCarousel mockups={mockups} accentColor={mockupColor} />
             ) : (

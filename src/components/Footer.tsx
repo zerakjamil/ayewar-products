@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
 import ayewarLogo from "@/assets/icons/ayewar-icon.png";
+import { useLanguage } from "@/i18n/context";
 
 const productLinks = [
   { name: "Chessmancer", href: "/products/chessmancer" },
@@ -14,13 +15,15 @@ const productLinks = [
   { name: "Zidobid", href: "/products/zidobid" },
 ];
 
-const companyLinks = [
-  { name: "دەربارەمان", href: "/about" },
-  { name: "پەیوەندی", href: "/contact" },
-  { name: "بەرهەمەکان", href: "/products" },
-];
-
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const companyLinks = [
+    { name: t.nav.about, href: "/about" },
+    { name: t.nav.contact, href: "/contact" },
+    { name: t.nav.products, href: "/products" },
+  ];
+
   return (
     <footer className="border-t border-[var(--color-border)] mt-20 sm:mt-28 md:mt-36 bg-[var(--color-bg-secondary)]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
@@ -37,18 +40,18 @@ export default function Footer() {
               />
             </Link>
             <p className="text-[var(--color-text-muted)] text-xs sm:text-sm leading-relaxed mt-4 max-w-xs">
-              ئیکۆسیستەمی تەکنەلۆجی ئەیوار — دروستکردن و ئەندازیاریکردنی ئەپڵیکەیشنە مۆبایل و سیستەمە خێراکان بە شێوازی سەربەخۆ.
+              {t.footer.description}
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-[var(--color-text-muted)] font-mono">
-              <span>ئەندازیار:</span>
-              <span className="text-[var(--color-text)] font-semibold">زێڕەک جەمیل (Zerak Jamil)</span>
+              <span>{t.footer.engineerLabel}</span>
+              <span className="text-[var(--color-text)] font-semibold">{t.footer.engineerName}</span>
             </div>
           </div>
 
           {/* Products */}
           <div>
             <h4 className="text-xs sm:text-sm font-bold text-[var(--color-text)] mb-4 uppercase tracking-wider">
-              بەرهەمەکان (Products)
+              {t.footer.productsTitle}
             </h4>
             <ul className="space-y-2.5">
               {productLinks.map((link) => (
@@ -67,11 +70,11 @@ export default function Footer() {
           {/* Navigation */}
           <div>
             <h4 className="text-xs sm:text-sm font-bold text-[var(--color-text)] mb-4 uppercase tracking-wider">
-              پەڕەکان (Navigation)
+              {t.footer.navTitle}
             </h4>
             <ul className="space-y-2.5">
               {companyLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] text-xs sm:text-sm transition-colors"
@@ -86,7 +89,7 @@ export default function Footer() {
           {/* Contact & GitHub */}
           <div>
             <h4 className="text-xs sm:text-sm font-bold text-[var(--color-text)] mb-4 uppercase tracking-wider">
-              پەیوەندی و تۆڕەکان
+              {t.footer.contactTitle}
             </h4>
             <a
               href="mailto:info@ayewar.com"
@@ -109,8 +112,8 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="mt-12 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-text-muted)]">
-          <p>© ٢٠٢٦ ئەیوار (Ayewar) — هەموو مافەکان پارێزراون.</p>
-          <p className="font-mono">Crafted with precision & care by Zerak Jamil</p>
+          <p>{t.footer.copyright}</p>
+          <p className="font-mono">{t.footer.tagline}</p>
         </div>
       </div>
     </footer>

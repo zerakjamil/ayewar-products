@@ -6,16 +6,18 @@ import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import { products } from "@/data/products";
+import { products, getProductContent } from "@/data/products";
+import { useLanguage } from "@/i18n/context";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const { t, locale } = useLanguage();
 
   const categories = [
-    { id: "all", name: "هەموو بەرهەمەکان (All)" },
-    { id: "transit", name: "هاتوچۆ و لۆجستیک (Transit)" },
-    { id: "lifestyle", name: "خزمەتگوزاری و بازرگانی (Services)" },
-    { id: "realtime", name: "کاتی ڕاستەوخۆ و یاری (Real-Time)" },
+    { id: "all", name: t.filters.all },
+    { id: "transit", name: t.filters.transit },
+    { id: "lifestyle", name: t.filters.services },
+    { id: "realtime", name: t.filters.realtime },
   ];
 
   const filteredProducts = products.filter((p) => {
@@ -53,22 +55,25 @@ export default function Home() {
       {/* Products Showcase */}
       <section className="py-8 sm:py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 md:space-y-24">
-          {filteredProducts.map((product, index) => (
-            <ProductCard
-              key={product.slug}
-              category={product.category}
-              name={product.name}
-              nameKu={product.nameKu}
-              description={product.description}
-              slug={product.slug}
-              icon={product.icon}
-              mockups={product.mockups}
-              index={index}
-              badge={product.badge}
-              tagline={product.tagline}
-              mockupColor={product.mockupColor}
-            />
-          ))}
+          {filteredProducts.map((product, index) => {
+            const content = getProductContent(product, locale);
+            return (
+              <ProductCard
+                key={product.slug}
+                category={content.category}
+                name={content.name}
+                nameSub={content.nameSub}
+                description={content.description}
+                slug={product.slug}
+                icon={product.icon}
+                mockups={product.mockups}
+                index={index}
+                badge={content.badge}
+                tagline={content.tagline}
+                mockupColor={product.mockupColor}
+              />
+            );
+          })}
         </div>
       </section>
 

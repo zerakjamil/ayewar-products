@@ -4,8 +4,10 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
+import { useLanguage } from "@/i18n/context";
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     reason: "",
     name: "",
@@ -22,11 +24,10 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[var(--color-bg)]">
       <Navbar />
 
       <section className="pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28">
@@ -35,10 +36,10 @@ export default function ContactPage() {
             <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16">
               <div className="text-center mb-8 sm:mb-10">
                 <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">
-                  پەیوەندیمان پێوە بکە
+                  {t.contact.badge}
                 </span>
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-2 sm:mt-3 text-[var(--color-text)] leading-tight px-2">
-                  پرۆژەیەکت هەیە، پشتگیری پێویستە، یان دەتەوێت زیاتر بزانیت؟ ئێمە لێرەین بۆ یارمەتیدانت.
+                  {t.contact.title}
                 </h1>
               </div>
 
@@ -46,7 +47,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                      هۆکاری پەیوەندی
+                      {t.contact.reason}
                     </label>
                     <select
                       name="reason"
@@ -54,22 +55,22 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors appearance-none touch-manipulation"
                     >
-                      <option value="">جۆری هەڵبژێرە</option>
-                      <option value="project">پرۆژەی نوێ</option>
-                      <option value="support">پشتگیری</option>
-                      <option value="partnership">هاوکاری</option>
-                      <option value="other">هی تر</option>
+                      <option value="">{t.contact.selectReason}</option>
+                      <option value="project">{t.contact.reasons.project}</option>
+                      <option value="support">{t.contact.reasons.support}</option>
+                      <option value="partnership">{t.contact.reasons.partnership}</option>
+                      <option value="other">{t.contact.reasons.other}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                      ناوی تەواو
+                      {t.contact.name}
                     </label>
                     <input
                       type="text"
                       name="name"
-                      placeholder="ناوت لێرە بنووسە"
+                      placeholder={t.contact.namePlaceholder}
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors touch-manipulation"
@@ -78,7 +79,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                      ناونیشانی ئیمەیڵ
+                      {t.contact.email}
                     </label>
                     <input
                       type="email"
@@ -92,7 +93,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                      ژمارەی تەلەفۆن
+                      {t.contact.phone}
                     </label>
                     <input
                       type="tel"
@@ -107,12 +108,12 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                    نامە
+                    {t.contact.message}
                   </label>
                   <textarea
                     name="message"
                     rows={6}
-                    placeholder="نامە"
+                    placeholder={t.contact.messagePlaceholder}
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors resize-none touch-manipulation"
@@ -124,7 +125,7 @@ export default function ContactPage() {
                     type="submit"
                     className="w-full sm:w-auto bg-[var(--color-accent)] text-white px-8 py-3.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity touch-manipulation"
                   >
-                    داواکاری بنێرە
+                    {t.contact.submit}
                   </button>
                 </div>
               </form>

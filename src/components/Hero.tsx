@@ -4,34 +4,37 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Code2, Smartphone, Cpu, ShieldCheck } from "lucide-react";
 import ayewarLogo from "@/assets/icons/ayewar-icon.png";
+import { useLanguage } from "@/i18n/context";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   const highlights = [
     {
       icon: Smartphone,
-      title: "٦ ئەپی کارای مۆبایل",
-      subtitle: "ئەزموونی پێشکەوتووی iOS و Android",
+      title: t.hero.highlights.apps.title,
+      subtitle: t.hero.highlights.apps.subtitle,
     },
     {
       icon: Cpu,
-      title: "کاتی ڕاستەوخۆ و خێرا",
-      subtitle: "بزوێنەری شەتڕەنج و مزادەی زیندوو",
+      title: t.hero.highlights.speed.title,
+      subtitle: t.hero.highlights.speed.subtitle,
     },
     {
       icon: Code2,
-      title: "ژێرخانی سەربەخۆ",
-      subtitle: "سێرڤەر، نەخشە و سیستەمی لۆجستیک",
+      title: t.hero.highlights.infra.title,
+      subtitle: t.hero.highlights.infra.subtitle,
     },
     {
       icon: ShieldCheck,
-      title: "ئاستی بەرهەمهێنان",
-      subtitle: "ڕاستەقینە لە بازاڕ و لەسەر سێرڤەر",
+      title: t.hero.highlights.prod.title,
+      subtitle: t.hero.highlights.prod.subtitle,
     },
   ];
 
   return (
     <section className="pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20 relative overflow-hidden">
-      {/* Background radial warmth - subtle, non-slop */}
+      {/* Background radial warmth */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--color-accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -58,7 +61,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] leading-snug max-w-4xl mx-auto"
         >
-          بەرهەمە داهێنەرانە و پلاتفۆرمە مۆبایلە پێشکەوتووەکان
+          {t.hero.title}
         </motion.h1>
 
         <motion.p
@@ -67,7 +70,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-6 text-[var(--color-text-muted)] text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4"
         >
-          کۆمەڵێک ئەپڵیکەیشن و پلاتفۆرمی کارا لە بەرهەمهێناندا (Production) لە بوارەکانی هاتوچۆ و چاودێری پاس، حجزکردنی لوکس، مزادەی کاتی ڕاستەوخۆ، و شیکاری شەتڕەنج بە ژیری دەستکرد. تەواوی پرۆسەی دیزاینی ڕووکار و سیستەمەکان بە شێوازی سەربەخۆ ئەندازیاری کراون.
+          {t.hero.description}
         </motion.p>
 
         {/* Engineering Highlights Ribbon */}
@@ -75,7 +78,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mt-10 sm:mt-12 text-right"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mt-10 sm:mt-12 text-start"
         >
           {highlights.map((h, i) => {
             const Icon = h.icon;
