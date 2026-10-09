@@ -14,11 +14,14 @@ interface PhoneCarouselProps {
 export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: PhoneCarouselProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isManualPaused, setIsManualPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isInteracted, setIsInteracted] = useState(false);
   const { dir } = useLanguage();
 
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const next = useCallback(() => {
     if (mockups.length <= 1) return;
@@ -32,6 +35,37 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
     setCurrent((prev) => (prev - 1 + mockups.length) % mockups.length);
   }, [mockups.length]);
 
+  // When user swipes, clicks, or interacts, pause auto-swiping for 30 seconds
+  const handleUserInteraction = useCallback(() => {
+    setIsInteracted(true);
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+    }
+    idleTimerRef.current = setTimeout(() => {
+      setIsInteracted(false);
+    }, 30000);
+  }, []);
+
+  // Cleanup idle timer on unmount
+  useEffect(() => {
+    return () => {
+      if (idleTimerRef.current) {
+        clearTimeout(idleTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Auto-advance timer: runs only when NOT manual-paused, NOT hovered, and NOT within 30s of user interaction
+  useEffect(() => {
+    if (isManualPaused || isHovered || isInteracted || mockups.length <= 1) return;
+
+    const timer = setInterval(() => {
+      next();
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [isManualPaused, isHovered, isInteracted, mockups.length, next]);
+
   // Preload all mockup images on mount so swipe transitions are instantaneous
   useEffect(() => {
     if (typeof window === "undefined" || !mockups) return;
@@ -43,36 +77,29 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
     });
   }, [mockups]);
 
-  // Auto-advance timer when not paused
-  useEffect(() => {
-    if (!isPlaying || mockups.length <= 1) return;
-    const timer = setInterval(() => {
-      next();
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [isPlaying, mockups.length, next]);
-
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
+      handleUserInteraction();
       dir === "rtl" ? next() : prev();
     } else if (e.key === "ArrowRight") {
+      handleUserInteraction();
       dir === "rtl" ? prev() : next();
     }
   };
 
-  // Drag end handler (for mouse drag and Framer Motion gestures)
+  // Drag end handler (for desktop mouse drag and Framer Motion swipe gestures)
   const handleDragEnd = (_: unknown, info: PanInfo) => {
-    const threshold = 40;
+    const threshold = 35;
     const velocity = 250;
     const offsetX = info.offset.x;
     const velocityX = info.velocity.x;
 
     if (offsetX < -threshold || velocityX < -velocity) {
-      // Swiped towards left
+      handleUserInteraction();
       dir === "rtl" ? prev() : next();
     } else if (offsetX > threshold || velocityX > velocity) {
-      // Swiped towards right
+      handleUserInteraction();
       dir === "rtl" ? next() : prev();
     }
   };
@@ -88,13 +115,11 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
     const diffX = touchStartX.current - e.changedTouches[0].clientX;
     const diffY = touchStartY.current - e.changedTouches[0].clientY;
 
-    // Only trigger if horizontal swipe is greater than vertical movement
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+      handleUserInteraction();
       if (diffX > 0) {
-        // Swiped left
         dir === "rtl" ? prev() : next();
       } else {
-        // Swiped right
         dir === "rtl" ? next() : prev();
       }
     }
@@ -105,7 +130,6 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
 
   if (!mockups || mockups.length === 0) return null;
 
-  // Seamless slide variants - crossfade and slide without leaving a blank frame
   const slideVariants = {
     enter: (d: number) => ({
       x: d > 0 ? (dir === "rtl" ? -100 : 100) : (dir === "rtl" ? 100 : -100),
@@ -124,6 +148,8 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
     }),
   };
 
+  const isAutoPlaying = !isManualPaused && !isHovered && !isInteracted;
+
   return (
     <div
       className="flex flex-col items-center gap-5 select-none"
@@ -131,10 +157,10 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
       tabIndex={0}
       role="region"
       aria-label="Interactive Mobile Mockup Showcase"
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Hidden eager preloading to prevent any black flicker on initial swipe */}
+      {/* Hidden eager preloading to prevent any black flicker */}
       <div className="hidden" aria-hidden="true">
         {mockups.map((m, idx) => (
           <Image
@@ -151,17 +177,14 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
 
       {/* Phone container */}
       <div className="relative">
-        {/* Subtle ambient light tinted with the app's brand color */}
         <div
           className="absolute -inset-8 rounded-[64px] blur-3xl opacity-25 pointer-events-none transition-colors duration-700"
           style={{ backgroundColor: accentColor }}
         />
 
-        {/* Phone chassis */}
         <div className="relative h-[440px] w-[215px] sm:h-[500px] sm:w-[245px] md:h-[540px] md:w-[265px]">
-          {/* Bezel frame */}
           <div className="absolute inset-0 rounded-[46px] sm:rounded-[52px] md:rounded-[56px] border-[10px] sm:border-[12px] border-[#141822] bg-[#141822] shadow-2xl shadow-black/80 overflow-hidden ring-1 ring-white/15">
-            {/* Dynamic Island / pill speaker */}
+            {/* Dynamic Island */}
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-4 bg-[#0a0d14] rounded-full z-30 flex items-center justify-end px-2.5 gap-1.5 shadow-sm pointer-events-none">
               <div className="w-2 h-2 rounded-full bg-[#1c2438]" />
               <div className="w-1.5 h-1.5 rounded-full bg-[#2a3652]/60" />
@@ -173,7 +196,6 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              {/* Subtle top screen light ambiance */}
               <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-black/20 pointer-events-none z-10" />
 
               <AnimatePresence initial={false} custom={direction}>
@@ -205,7 +227,6 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
                     loading="eager"
                     draggable={false}
                   />
-                  {/* Subtle glass reflection highlight */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/[0.07] pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
@@ -219,9 +240,12 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
 
       {/* Controls Bar */}
       <div className="flex items-center gap-3 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-full px-3.5 py-1.5 shadow-lg">
-        {/* Back button: Left in LTR, Right in RTL */}
+        {/* Back button */}
         <button
-          onClick={prev}
+          onClick={() => {
+            handleUserInteraction();
+            prev();
+          }}
           disabled={mockups.length <= 1}
           className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30 p-0"
           aria-label="Previous screen"
@@ -238,17 +262,28 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
           <span className="opacity-60">{String(mockups.length).padStart(2, "0")}</span>
 
           <button
-            onClick={() => setIsPlaying(!isPlaying)}
+            onClick={() => {
+              if (isManualPaused) {
+                setIsManualPaused(false);
+                setIsInteracted(false);
+              } else {
+                setIsManualPaused(true);
+              }
+            }}
             className="p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors ml-0.5"
-            aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
+            aria-label={isAutoPlaying ? "Pause autoplay" : "Start autoplay"}
+            title={isAutoPlaying ? "Auto-advancing" : isInteracted ? "Paused for 30s after user input" : "Paused"}
           >
-            {isPlaying ? <Pause size={11} /> : <Play size={11} />}
+            {isAutoPlaying ? <Pause size={11} /> : <Play size={11} />}
           </button>
         </div>
 
-        {/* Forward button: Right in LTR, Left in RTL */}
+        {/* Forward button */}
         <button
-          onClick={next}
+          onClick={() => {
+            handleUserInteraction();
+            next();
+          }}
           disabled={mockups.length <= 1}
           className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-colors disabled:opacity-30 p-0"
           aria-label="Next screen"
@@ -263,6 +298,7 @@ export default function PhoneCarousel({ mockups, accentColor = "#38bdf8" }: Phon
           <button
             key={i}
             onClick={() => {
+              handleUserInteraction();
               setDirection(i > current ? 1 : -1);
               setCurrent(i);
             }}

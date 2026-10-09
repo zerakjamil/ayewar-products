@@ -206,11 +206,11 @@ export const products: Product[] = [
     mockupColor: "#E5A93C",
     icon: dallakIcon,
     mockups: [
+      dallak5,
       dallak1,
       dallak2,
       dallak3,
       dallak4,
-      dallak5,
       dallak6,
       dallak7,
       dallak8,
@@ -306,8 +306,8 @@ export const products: Product[] = [
     mockupColor: "#D97706",
     icon: dallakPartnersIcon,
     mockups: [
-      dallakPartners1,
       dallakPartners2,
+      dallakPartners1,
       dallakPartners3,
       dallakPartners4,
       dallakPartners5,
