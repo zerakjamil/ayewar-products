@@ -1,0 +1,51 @@
+name: Ayewar CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: Check the production server
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public
+          cp -R public .next/standalone/public
+          cp -R .next/static .next/standalone/.next/static
+          PORT=3000 HOSTNAME=127.0.0.1 node .next/standalone/server.js > /tmp/ayewar-ci-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for attempt in {1..30}; do
+            if curl --silent --fail --location http://127.0.0.1:3000/ > /dev/null; then ready=1; break; fi
+            sleep 1
+          done
+          if [ "$ready" != 1 ]; then cat /tmp/ayewar-ci-server.log; exit 1; fi
+          SITE_URL=http://127.0.0.1:3000 npm run test:smoke
