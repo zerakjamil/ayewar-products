@@ -10,6 +10,15 @@ function metaContent(html, key) {
   }
 }
 
+function hasContactEmailLink(html, email) {
+  if (html.includes(`href="mailto:${email}"`)) return true;
+  return [...html.matchAll(/href="\/cdn-cgi\/l\/email-protection#([a-f0-9]+)"/gi)].some(([, hex]) => {
+    if (hex.length < 4 || hex.length % 2) return false;
+    const encoded = Buffer.from(hex, "hex");
+    return encoded.subarray(1).map((byte) => byte ^ encoded[0]).toString("utf8") === email;
+  });
+}
+
 function assertLandmarks(html, route) {
   const header = html.indexOf("<header");
   const main = html.indexOf("<main");
@@ -58,7 +67,7 @@ test("contact fields have associated labels and required email and message input
   }
   assert.match(html, /<input[^>]*id="contact-email"[^>]*required/);
   assert.match(html, /<textarea[^>]*id="contact-message"[^>]*required/);
-  assert.match(html, /href="mailto:info@ayewar.com"/);
+  assert.ok(hasContactEmailLink(html, "info@ayewar.com"), "contact must link to the correct email, directly or through Cloudflare email protection");
 });
 
 test("contact has a native email fallback and never defaults to submitting personal fields in the page URL", async () => {

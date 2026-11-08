@@ -52,6 +52,12 @@ The browser title is “Ayewar — Apps & Games”. Favicons use the symbol from
 
 Before publishing, verify desktop and narrow mobile widths in all three languages. Check filter membership, keyboard focus, the mobile menu's Escape behavior, gallery arrows and modal dismissal, and email preparation. Delivery through an installed email application requires a manual check on that device.
 
+## Production
+
+The live site is [products.ayewar.com](https://products.ayewar.com). Connect using the configured `ssh ayewar` alias; the checkout resolves to `/srv/storage/ayewar-products`. Its server-local Docker Compose configuration runs the `web` service as container `ayewar-products`, bound to `127.0.0.1:8012`. The checked-in Supervisor configuration is historical.
+
+For application releases, pull `main` with `--ff-only`, retain the running image under a rollback tag, build and check a private candidate, then recreate only `web` with the verified image. Do not overwrite the server-local Docker files or the modified tracked log. Run `SITE_URL=https://products.ayewar.com npm run test:smoke` after switching. The public checks recognize Cloudflare-protected email links only when they decode to the expected contact address. Deployment evidence is recorded in `WEBSITE_REVIEW.md`.
+
 
 The optional `/play` district uses Three.js and cannon-es. The bus loads from [Polyfork](https://github.com/lucas-martinic/polyfork-catalog); its free models are hosted by Polyfork under its separate license and are not redistributed here. The locally bundled buildings, tree, sedan, and character are Kenney CC0 models from [Hidencod/tge-assets](https://github.com/Hidencod/tge-assets), from the City Kit Suburban, Nature Kit, Car Kit, and Mini Characters packs. Discovery audio is synthesized in the browser and is off until enabled.
 
