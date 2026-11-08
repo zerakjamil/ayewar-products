@@ -2,23 +2,40 @@ import { StaticImageData } from "next/image";
 import { Locale } from "@/i18n/translations";
 
 // App icons
+import ledgerIcon from "@/assets/icons/ledger-icon.png";
+import soraghIcon from "@/assets/icons/soragh-icon.png";
 import chessmacnerIcon from "@/assets/icons/ayewar-chessmacner-icon.png";
 import dallakIcon from "@/assets/icons/ayewar-dallak-icon.png";
 import dallakPartnersIcon from "@/assets/icons/ayewar-dallak-partners-icon.png";
-import raidersIcon from "@/assets/icons/ayewar-raiders-icon.png";
-import studentsIcon from "@/assets/icons/ayewar-students-icon.png";
+import raidersIcon from "@/assets/icons/raiders-symbol.svg";
+import studentsIcon from "@/assets/icons/passengers-symbol.svg";
 import zidobidIcon from "@/assets/icons/ayewar-zidobid-icon.png";
 
-// Chessmacner mockups (9)
-import chessmacner1 from "@/assets/mockup/chessmacner/mockup-1.png";
-import chessmacner2 from "@/assets/mockup/chessmacner/mockup-2.png";
-import chessmacner3 from "@/assets/mockup/chessmacner/mockup-3.png";
-import chessmacner4 from "@/assets/mockup/chessmacner/mockup-4.png";
-import chessmacner5 from "@/assets/mockup/chessmacner/mockup-5.png";
-import chessmacner6 from "@/assets/mockup/chessmacner/mockup-6.png";
-import chessmacner7 from "@/assets/mockup/chessmacner/mockup-7.png";
-import chessmacner8 from "@/assets/mockup/chessmacner/mockup-8.png";
-import chessmacner9 from "@/assets/mockup/chessmacner/mockup-9.png";
+import ledger1 from "@/assets/mockup/ledger/splash-1.jpg";
+import ledger2 from "@/assets/mockup/ledger/home-2.jpg";
+import ledger3 from "@/assets/mockup/ledger/excuse-3.jpg";
+import ledger4 from "@/assets/mockup/ledger/session-4.jpg";
+import ledger5 from "@/assets/mockup/ledger/detail-5.jpg";
+
+import soragh1 from "@/assets/mockup/soragh/home-1.png";
+import soragh2 from "@/assets/mockup/soragh/map-2.png";
+import soragh3 from "@/assets/mockup/soragh/profile-3.png";
+import soragh4 from "@/assets/mockup/soragh/search-4.png";
+import soragh5 from "@/assets/mockup/soragh/form-5.png";
+import soragh6 from "@/assets/mockup/soragh/scan-6.png";
+
+import chessmancer1 from "@/assets/mockup/chessmancer/screen-1.jpeg";
+import chessmancer2 from "@/assets/mockup/chessmancer/screen-2.jpeg";
+import chessmancer3 from "@/assets/mockup/chessmancer/screen-3.jpeg";
+import chessmancer4 from "@/assets/mockup/chessmancer/screen-4.jpeg";
+import chessmancer5 from "@/assets/mockup/chessmancer/screen-5.jpeg";
+import chessmancer6 from "@/assets/mockup/chessmancer/screen-6.jpeg";
+import chessmancer7 from "@/assets/mockup/chessmancer/screen-7.jpeg";
+import chessmancer8 from "@/assets/mockup/chessmancer/screen-8.jpeg";
+import chessmancer9 from "@/assets/mockup/chessmancer/screen-9.jpeg";
+import chessmancer10 from "@/assets/mockup/chessmancer/screen-10.jpeg";
+import chessmancer11 from "@/assets/mockup/chessmancer/screen-11.jpeg";
+import chessmancer12 from "@/assets/mockup/chessmancer/screen-12.jpeg";
 
 // Dallak mockups (9)
 import dallak1 from "@/assets/mockup/dallak/mockup-1.png";
@@ -83,6 +100,7 @@ export interface Product {
   mockupColor: string;
   icon: StaticImageData;
   mockups: StaticImageData[];
+  cardMockups?: StaticImageData[];
   translations: Record<Locale, ProductContent>;
   // Convenience properties referencing default ckb
   name: string;
@@ -105,26 +123,17 @@ export const products: Product[] = [
     slug: "chessmancer",
     mockupColor: "#2d9bf0",
     icon: chessmacnerIcon,
-    mockups: [
-      chessmacner1,
-      chessmacner2,
-      chessmacner3,
-      chessmacner4,
-      chessmacner5,
-      chessmacner6,
-      chessmacner7,
-      chessmacner8,
-      chessmacner9,
-    ],
-    name: "Ayewar Chessmancer",
-    nameKu: "ئەیوار Chessmancer",
+    mockups: [chessmancer1, chessmancer2, chessmancer12, chessmancer3, chessmancer4, chessmancer5, chessmancer6, chessmancer7, chessmancer8, chessmancer9, chessmancer10, chessmancer11],
+    cardMockups: [chessmancer1, chessmancer2],
+    name: "Chessmancer",
+    nameKu: "Chessmancer",
     category: "پلاتفۆرمی فێربوون و ڕاهێنانی شەتڕەنج",
     badge: "AI & Tactics Engine",
     tagline: "ڕاهێنانی زیرەکی شەتڕەنج و شیکاری پۆزیشن بە ئەلگۆریتمی پێشکەوتوو",
     description:
       "فێربوونی ستراتیژی شەتڕەنج لەگەڵ پلاتفۆرمی فێربوونی گشتگیرمان. Chessmancer تاکتیکی مەشق، شیکردنەوەی پۆزیشن، و سیستەمی هەڵسەنگاندنی ELO ی پێشکەوتوو لەخۆ دەگرێت بۆ یارمەتیدانی یاریزانانی هەموو ئاستەکان بۆ باشترکردنی یارییان.",
     fullDescription:
-      "ئەیوار Chessmancer پلاتفۆرمێکی تەواو پێشکەوتووی شەتڕەنجە کە تێیدا یاریزان دەتوانێت تاکتیکە ئاڵۆزەکان مەشق بکات، پۆزیشنە یارییەکان بە بزوێنەری شەتڕەنج شیکار بکات، و لەگەڵ سیستەمی فەرمی ELO بەردەوام ئاستی خۆی بەرز بکاتەوە. ئەپەکە خاوەنی مۆدی ئۆنلاین و ئۆفلاینە و بۆ ئاستی سەرەتایی تا پیشەگەر دیزاین کراوە.",
+      "Chessmancer پلاتفۆرمێکی تەواو پێشکەوتووی شەتڕەنجە کە تێیدا یاریزان دەتوانێت تاکتیکە ئاڵۆزەکان مەشق بکات، پۆزیشنە یارییەکان بە بزوێنەری شەتڕەنج شیکار بکات، و لەگەڵ سیستەمی هەڵسەنگاندنی ELO بەردەوام ئاستی خۆی بەرز بکاتەوە. ئەپەکە خاوەنی مۆدی ئۆنلاین و ئۆفلاینە و بۆ ئاستی سەرەتایی تا پیشەگەر دیزاین کراوە.",
     features: [
       {
         title: "ئاسان لە بەکارهێنان",
@@ -136,7 +145,7 @@ export const products: Product[] = [
       },
       {
         title: "ڕوون و ئاشکرا",
-        description: "بەبێ هیچ کرێیەکی شاراوە. بەبێ کرێی کردنەوەی حساب. ڕوونی تەواو",
+        description: "بینینی ئاست و پێشکەوتنی یاریزان لە ناو ئەپەکە",
       },
       {
         title: "بەهێز",
@@ -146,25 +155,25 @@ export const products: Product[] = [
     services: ["دیزاینی UI/UX و پرۆتۆتایپ", "ئەندازیاری بزوێنەر و ژیری دەستکرد", "پەرەپێدانی تەواوەتی بەرهەم", "تاقیکردنەوە و دڵنیایی جۆری"],
     translations: {
       ckb: {
-        name: "ئەیوار Chessmancer",
-        nameSub: "Ayewar Chessmancer",
+        name: "Chessmancer",
+        nameSub: "Chessmancer",
         category: "پلاتفۆرمی فێربوون و ڕاهێنانی شەتڕەنج",
         badge: "AI & Tactics Engine",
         tagline: "ڕاهێنانی زیرەکی شەتڕەنج و شیکاری پۆزیشن بە ئەلگۆریتمی پێشکەوتوو",
         description:
           "فێربوونی ستراتیژی شەتڕەنج لەگەڵ پلاتفۆرمی فێربوونی گشتگیرمان. Chessmancer تاکتیکی مەشق، شیکردنەوەی پۆزیشن، و سیستەمی هەڵسەنگاندنی ELO ی پێشکەوتوو لەخۆ دەگرێت.",
         fullDescription:
-          "ئەیوار Chessmancer پلاتفۆرمێکی تەواو پێشکەوتووی شەتڕەنجە کە تێیدا یاریزان دەتوانێت تاکتیکە ئاڵۆزەکان مەشق بکات، پۆزیشنە یارییەکان بە بزوێنەری شەتڕەنج شیکار بکات، و لەگەڵ سیستەمی فەرمی ELO بەردەوام ئاستی خۆی بەرز بکاتەوە.",
+          "Chessmancer پلاتفۆرمێکی تەواو پێشکەوتووی شەتڕەنجە کە تێیدا یاریزان دەتوانێت تاکتیکە ئاڵۆزەکان مەشق بکات، پۆزیشنە یارییەکان بە بزوێنەری شەتڕەنج شیکار بکات، و لەگەڵ سیستەمی هەڵسەنگاندنی ELO بەردەوام ئاستی خۆی بەرز بکاتەوە.",
         features: [
           { title: "ئاسان لە بەکارهێنان", description: "ڕووکاری ئەپلیکەیشنەکەمان بۆ بەکارهێنانی گشتگیر دیزاین کراوە" },
           { title: "دەستگەیشتنی خێرا", description: "بگە بە ناوەڕۆکی دڵخوازت تەنها بە چەند کلیکێک" },
-          { title: "ڕوون و ئاشکرا", description: "بەبێ هیچ کرێیەکی شاراوە، ڕوونی تەواو" },
+          { title: "ڕوون و ئاشکرا", description: "بینینی ئاست و پێشکەوتنی یاریزان لە ناو ئەپەکە" },
           { title: "بەهێز و گشتگیر", description: "شەتڕەنجەکەت بەڕێوەببە، ئۆنلاین و ئۆفلاین یاری بکە" },
         ],
         services: ["دیزاینی UI/UX و پرۆتۆتایپ", "ئەندازیاری بزوێنەر و ژیری دەستکرد", "پەرەپێدانی تەواوەتی بەرهەم", "تاقیکردنەوە و دڵنیایی جۆری"],
       },
       ar: {
-        name: "Ayewar Chessmancer",
+        name: "Chessmancer",
         nameSub: "منصة تدريب وتحليل الشطرنج",
         category: "منصة تدريب وتحليل الشطرنج بالذكاء الاصطناعي",
         badge: "محرك التكتيك والذكاء الاصطناعي",
@@ -172,17 +181,17 @@ export const products: Product[] = [
         description:
           "تعلّم واحتراف تكتيكات الشطرنج مع منصتنا الشاملة. يوفر Chessmancer تمارين تكتيكية وتحليلاً للوضعيات ونظام تصنيف ELO متقدم لمساعدة اللاعبين من كافة المستويات.",
         fullDescription:
-          "تطبيق Ayewar Chessmancer منصة متطورة للشطرنج تتيح للاعبين حل المسائل التكتيكية المعقدة، وتحليل رقعة اللعب بواسطة محركات الشطرنج الآنية، وتطوير تصنيفهم عبر نظام ELO المعتمد. يدعم اللعب المباشر وغير المتصل، ومصمم للمبتدئين والمحترفين على حد سواء.",
+          "تطبيق Chessmancer منصة متطورة للشطرنج تتيح للاعبين حل المسائل التكتيكية المعقدة، وتحليل رقعة اللعب بواسطة محركات الشطرنج الآنية، وتطوير تصنيفهم عبر نظام تصنيف ELO. يدعم اللعب المباشر وغير المتصل، ومصمم للمبتدئين والمحترفين على حد سواء.",
         features: [
           { title: "سهولة الاستخدام", description: "واجهة تفاعلية مصممة لتجربة لعب سلسة ومريحة لجميع اللاعبين." },
-          { title: "تحليل تكتيكي فوري", description: "فحص تحركات الرقعة وتحليل الاحتمالات في أجزاء من الثانية." },
-          { title: "شفافية وتصنيف دقيق", description: "تتبع دقيق لمستوى التقدم وتصنيف ELO المعتمد بدون تعقيد." },
+          { title: "تحليل تكتيكي فوري", description: "فحص تحركات الرقعة وتحليل الوضعيات والاحتمالات." },
+          { title: "شفافية وتصنيف دقيق", description: "تتبع دقيق لمستوى التقدم وتصنيف ELO داخل التطبيق." },
           { title: "مرونة عالية في اللعب", description: "إمكانية اللعب والتدريب أونلاين وأوفلاين من الهاتف مباشرة." },
         ],
         services: ["تصميم واجهات UI/UX", "هندسة المحركات والذكاء الاصطناعي", "التطوير البرمجي الشامل", "اختبارات الأداء والجودة"],
       },
       en: {
-        name: "Ayewar Chessmancer",
+        name: "Chessmancer",
         nameSub: "Chess Learning & AI Tactics Platform",
         category: "Chess Learning & Tactics Platform",
         badge: "AI & Tactics Engine",
@@ -190,10 +199,10 @@ export const products: Product[] = [
         description:
           "Learn and master chess strategy with our comprehensive training platform. Chessmancer features tactical puzzles, position analysis, and an advanced ELO rating system to help players at every level.",
         fullDescription:
-          "Ayewar Chessmancer is a high-performance chess ecosystem where players train complex tactical puzzles, analyze board positions using real-time engines, and continuously rank up with official ELO progression. Featuring both online and offline game modes, built for novices to grandmasters alike.",
+          "Chessmancer combines tactical puzzles, board analysis, and player progression in a mobile chess experience.",
         features: [
           { title: "Intuitive Interface", description: "Designed for clean focus and seamless board interaction." },
-          { title: "Instant Tactical Analysis", description: "Analyze critical positions and evaluate moves in milliseconds." },
+          { title: "Tactical analysis", description: "Analyze board positions and evaluate possible moves." },
           { title: "Transparent Progression", description: "Fair rating, structured puzzles, and clear progress tracking." },
           { title: "Mobile Mastery", description: "Play and study anywhere with full offline and online support." },
         ],
@@ -405,14 +414,14 @@ export const products: Product[] = [
     icon: raidersIcon,
     mockups: [raiders1, raiders2, raiders3, raiders4, raiders5, raiders6, raiders7],
     name: "Ayewar Raiders",
-    nameKu: "ئەیوار Raiders",
+    nameKu: "Ayewar Raiders",
     category: "پلاتفۆرمی هات و چۆ بۆ شۆفێری پاسەکانی کوردستان",
     badge: "Fleet Dispatch & GIS",
     tagline: "بەڕێوەبردنی هێڵ و پاس، چاودێری نەخشە و ئابوونەی مانگانەی سەرنشینان",
     description:
       "پلاتفۆرمێکی تایبەت بۆ شۆفێرەکانی پاس لە کوردستان کە دەتوانن بە ئاسانی پلانەکانی بەشداریکردن بەڕێوەبەن، مووشتەریە ئامادەبووەکان بەدواداچوون بکەن، شوێنەکانیان چاودێری بکەن، و ئامارە ڕاستەوخۆکانی گەشتەکانیان ببینن.",
     fullDescription:
-      "ئەیوار Raiders پلاتفۆرمێکی پێشکەوتووە بۆ شۆفێرەکانی پاس لە کوردستان. شۆفێرەکان دەتوانن پلانەکانی بەشداریکردنی مووشتەریان بەڕێوەبەن، مووشتەریە ئامادەبووەکان بەدواداچوون بکەن، شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن، و ئامارەکانی گەشتەکانیان ببینن. بەم پلاتفۆرمە، کارەکانی ڕۆژانەی شۆفێرەکان ئاسانتر و کاریگەرتر دەبن.",
+      "Ayewar Raiders پلاتفۆرمێکی پێشکەوتووە بۆ شۆفێرەکانی پاس لە کوردستان. شۆفێرەکان دەتوانن پلانەکانی بەشداریکردنی مووشتەریان بەڕێوەبەن، مووشتەریە ئامادەبووەکان بەدواداچوون بکەن، شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن، و ئامارەکانی گەشتەکانیان ببینن. بەم پلاتفۆرمە، کارەکانی ڕۆژانەی شۆفێرەکان ئاسانتر و کاریگەرتر دەبن.",
     features: [
       {
         title: "بەڕێوەبردنی پلانەکانی بەشداریکردن",
@@ -434,7 +443,7 @@ export const products: Product[] = [
     services: ["سیستەمی چاودێری جوگرافی و GPS", "بەڕێوەبردنی بەشداریکردنی سەرنشین", "دیزاین و پرۆتۆتایپی ئەپی شۆفێر", "ئەندازیاری داتای هاتوچۆ"],
     translations: {
       ckb: {
-        name: "ئەیوار Raiders",
+        name: "Ayewar Raiders",
         nameSub: "Ayewar Raiders Driver",
         category: "پلاتفۆرمی هات و چۆ بۆ شۆفێری پاسەکانی کوردستان",
         badge: "Fleet Dispatch & GIS",
@@ -442,7 +451,7 @@ export const products: Product[] = [
         description:
           "پلاتفۆرمێکی تایبەت بۆ شۆفێرەکانی پاس لە کوردستان کە دەتوانن بە ئاسانی پلانەکانی بەشداریکردن بەڕێوەبەن، مووشتەریە ئامادەبووەکان بەدواداچوون بکەن، و شوێنەکانیان چاودێری بکەن.",
         fullDescription:
-          "ئەیوار Raiders پلاتفۆرمێکی پێشکەوتووە بۆ شۆفێرەکانی پاس لە کوردستان. شۆفێرەکان دەتوانن پلانەکانی بەشداریکردنی مووشتەریان بەڕێوەبەن، و شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن.",
+          "Ayewar Raiders پلاتفۆرمێکی پێشکەوتووە بۆ شۆفێرەکانی پاس لە کوردستان. شۆفێرەکان دەتوانن پلانەکانی بەشداریکردنی مووشتەریان بەڕێوەبەن، و شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن.",
         features: [
           { title: "بەڕێوەبردنی پلانەکانی بەشداریکردن", description: "پەیوەندی لەگەڵ مووشتەریان بەڕێوەببە و پلانەکانیان بەدواداچوون بکە" },
           { title: "بەدواداچوونی مووشتەریە ئامادەبووەکان", description: "موشتەریەکانی کە لە گەشتەکاندا ئامادە نین بەدواداچوون بکە" },
@@ -490,19 +499,19 @@ export const products: Product[] = [
     },
   },
   {
-    slug: "students",
+    slug: "passengers",
     mockupColor: "#10B981",
     icon: studentsIcon,
     mockups: [students1, students2, students3, students4, students5, students6],
-    name: "Ayewar Students",
-    nameKu: "ئەیوار Students",
+    name: "Ayewar Passengers",
+    nameKu: "Ayewar Passengers",
     category: "پلاتفۆرمی هات و چۆ بۆ مووشتەریەکانی پاسەکانی کوردستان",
     badge: "Passenger Transit App",
     tagline: "بەدواداچوونی ڕاستەوخۆی پاس لەسەر نەخشە و کاتی خەمڵێنراوی گەیشتن",
     description:
       "لاپەڕەی مووشتەری بۆ پلاتفۆرمی Ayewar Raiders. مووشتەریەکان دەتوانن زانیاری شۆفێرەکانیان ببینن، شوێنەکانیان چاودێری بکەن، ئامارە ڕاستەوخۆکانی گەشتەکان ببینن، و پلانەکانی بەشداریکردنی مانگانە بەڕێوەبەن.",
     fullDescription:
-      "ئەیوار Students لاپەڕەی مووشتەری پلاتفۆرمی Ayewar Raiders یە بۆ مووشتەریەکانی پاسەکانی کوردستان. مووشتەریەکان دەتوانن زانیاری شۆفێرەکانیان ببینن، شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن، ئامارەکانی گەشتەکان ببینن، و پلانەکانی بەشداریکردنی مانگانە بەڕێوەبەن. بەم پلاتفۆرمە، گەشتکردن لە کوردستان ئاسانتر و متمانەپێکراوتر دەبێت.",
+      "Ayewar Passengers لاپەڕەی مووشتەری پلاتفۆرمی Ayewar Raiders یە بۆ مووشتەریەکانی پاسەکانی کوردستان. مووشتەریەکان دەتوانن زانیاری شۆفێرەکانیان ببینن، شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن، ئامارەکانی گەشتەکان ببینن، و پلانەکانی بەشداریکردنی مانگانە بەڕێوەبەن. بەم پلاتفۆرمە، گەشتکردن لە کوردستان ئاسانتر و متمانەپێکراوتر دەبێت.",
     features: [
       {
         title: "زانیاری شۆفێرەکان",
@@ -524,15 +533,15 @@ export const products: Product[] = [
     services: ["ئەپی مۆبایلی سەرنشین بۆ قوتابیان", "سیستەمی ژماردنی کاتی گەیشتن", "دیزاینی ڕووکاری خێرا و سادە", "ئاگادارکردنەوەی جووڵەی پاس"],
     translations: {
       ckb: {
-        name: "ئەیوار Students",
-        nameSub: "Ayewar Students Passenger",
+        name: "Ayewar Passengers",
+        nameSub: "Ayewar Passengers",
         category: "پلاتفۆرمی هات و چۆ بۆ مووشتەریەکانی پاسەکانی کوردستان",
         badge: "Passenger Transit App",
         tagline: "بەدواداچوونی ڕاستەوخۆی پاس لەسەر نەخشە و کاتی خەمڵێنراوی گەیشتن",
         description:
           "لاپەڕەی مووشتەری بۆ پلاتفۆرمی Ayewar Raiders. مووشتەریەکان دەتوانن زانیاری شۆفێرەکانیان ببینن، شوێنەکانیان چاودێری بکەن، و پلانەکانی بەشداریکردنی مانگانە بەڕێوەبەن.",
         fullDescription:
-          "ئەیوار Students لاپەڕەی مووشتەری پلاتفۆرمی Ayewar Raiders یە بۆ مووشتەریەکانی پاسەکانی کوردستان. مووشتەریەکان دەتوانن شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن و پەیوەندی بە شۆفێرەوە بکەن.",
+          "Ayewar Passengers لاپەڕەی مووشتەری پلاتفۆرمی Ayewar Raiders یە بۆ مووشتەریەکانی پاسەکانی کوردستان. مووشتەریەکان دەتوانن شوێنەکانیان لە ڕاستەوخۆدا چاودێری بکەن و پەیوەندی بە شۆفێرەوە بکەن.",
         features: [
           { title: "زانیاری شۆفێرەکان", description: "زانیاری تەواوی شۆفێرەکەت ببینە و متمانەی پێ بکە" },
           { title: "چاودێری شوێنەکان", description: "شوێنی ڕاستەوخۆی پاسەکەت ببینە و چاودێری بکە" },
@@ -542,7 +551,7 @@ export const products: Product[] = [
         services: ["ئەپی مۆبایلی سەرنشین بۆ قوتابیان", "سیستەمی ژماردنی کاتی گەیشتن", "دیزاینی ڕووکاری خێرا و سادە", "ئاگادارکردنەوەی جووڵەی پاس"],
       },
       ar: {
-        name: "Ayewar Students",
+        name: "Ayewar Passengers",
         nameSub: "تطبيق الطلاب والركاب",
         category: "منصة تتبع الحافلات المدرسية والجامعية للركاب",
         badge: "تطبيق ركاب النقل",
@@ -550,9 +559,9 @@ export const products: Product[] = [
         description:
           "تطبيق الركاب والطلاب التابع لمنصة Ayewar Raiders. يتيح للركاب معرفة بيانات السائق، وتتبع موقع الحافلة مباشرة، ومعرفة مواعيد الوصول وإدارة بطاقات الاشتراك.",
         fullDescription:
-          "تطبيق Ayewar Students هو الواجهة المخصصة للطلاب والركاب في كوردستان. يمنحهم راحة البال من خلال متابعة مسار الحافلة على الخريطة في الوقت الفعلي، وحساب موعد الوصول المتوقع (ETA)، والتواصل المباشر مع السائق المعتمد.",
+          "تطبيق Ayewar Passengers هو الواجهة المخصصة للطلاب والركاب في كوردستان. يمنحهم راحة البال من خلال متابعة مسار الحافلة على الخريطة في الوقت الفعلي، وحساب موعد الوصول المتوقع (ETA)، والتواصل المباشر مع السائق.",
         features: [
-          { title: "بيانات السائق المعتمد", description: "الاطلاع على معلومات السائق وبيانات الحافلة وأرقام الاتصال." },
+          { title: "بيانات السائق", description: "الاطلاع على معلومات السائق وبيانات الحافلة وأرقام الاتصال." },
           { title: "تتبع الحافلة على الخريطة", description: "مشاهدة موقع الحافلة لحظة بلحظة أثناء توجهها إليك." },
           { title: "وقت الوصول المتوقع (ETA)", description: "تحديثات دقيقة عن الوقت المتبقي لوصول الحافلة." },
           { title: "تواصل مباشر مع السائق", description: "إمكانية الاتصال أو إرسال الرسائل الفورية للسائق." },
@@ -560,7 +569,7 @@ export const products: Product[] = [
         services: ["تطوير تطبيقات الركاب للجوال", "محرك حساب وقت الوصول الفعلي", "تصميم واجهات سريعة وسهلة", "إشعارات تنبيه اقتراب الحافلة"],
       },
       en: {
-        name: "Ayewar Students",
+        name: "Ayewar Passengers",
         nameSub: "Student & Passenger Transit",
         category: "Passenger Transit & Route Tracking Platform",
         badge: "Passenger Transit App",
@@ -568,9 +577,9 @@ export const products: Product[] = [
         description:
           "The passenger companion app for the Ayewar Raiders platform. Riders can view driver credentials, track bus positions in real time, see route updates, and manage monthly transit passes.",
         fullDescription:
-          "Ayewar Students connects students and daily commuters across Kurdistan with their assigned buses. Riders track live bus locations on map, calculate estimated time of arrival, contact their verified driver directly, and maintain their monthly transit passes.",
+          "Ayewar Passengers connects students and daily commuters across Kurdistan with their assigned buses. Riders track live bus locations on map, calculate estimated time of arrival, contact their verified driver directly, and maintain their monthly transit passes.",
         features: [
-          { title: "Verified Driver Profiles", description: "View driver details, bus information, and verified contact numbers." },
+          { title: "Driver profiles", description: "View driver details, bus information, and contact numbers." },
           { title: "Live Map Tracking", description: "Track the incoming bus directly on the map in real time." },
           { title: "Accurate Arrival ETA", description: "Real-time travel updates and computed arrival times." },
           { title: "Direct Driver Connect", description: "Immediate contact via phone call and messaging." },
@@ -650,7 +659,7 @@ export const products: Product[] = [
         fullDescription:
           "يُقدّم تطبيق Ayewar Zidobid تجربة مزادات حية وعصرية في كوردستان لبيع السلع الثمينة والمركبات والإلكترونيات. يعرض البائعون سلعهم مع تقارير الفحص والضمان، ويتنافس المشترون عبر محرك مزادات مباشر مع عدادات تنازلية وتنبيهات فورية للمزايدات الأعلى.",
         features: [
-          { title: "مزادات مباشرة لحظية", description: "المزايدة في الوقت الفعلي بدون أي تأخير على الخادم." },
+          { title: "مزادات مباشرة لحظية", description: "متابعة المزاد والمشاركة بالمزايدات في الوقت الفعلي." },
           { title: "فحص ومعاينة السلع", description: "معرض صور عالي الدقة، وتاريخ الفحص، وحالة السلعة." },
           { title: "سجل المزايدات الشفاف", description: "عرض سجل المزايدات السابقة وهوية المتنافسين بوضوح." },
           { title: "تنبيهات المزايدة الفورية", description: "إشعار فوري عند قيام أي مستخدم بتقديم عرض أعلى." },
@@ -662,18 +671,138 @@ export const products: Product[] = [
         nameSub: "Live Auction & Marketplace Platform",
         category: "Real-Time Live Auction & Digital Marketplace",
         badge: "Real-Time Auction Engine",
-        tagline: "Millisecond live bidding engine with total price transparency and instant alerts",
+        tagline: "Live bidding, bid history, and outbid alerts",
         description:
-          "An advanced live auction mobile platform where sellers showcase items and buyers compete with real-time bidding, zero server lag, and complete transaction transparency.",
+          "A live auction mobile platform where sellers showcase items and buyers follow auctions, place bids, and review bid history.",
         fullDescription:
-          "Ayewar Zidobid brings real-time competitive bidding to Kurdistan for electronics, vehicles, and collectibles. Verified sellers publish catalog listings, and bidders place bids in real time via high-speed socket streams with countdown timers and instant outbid alerts.",
+          "Ayewar Zidobid brings live auctions to mobile, with item listings, countdown timers, bid history, and outbid alerts.",
         features: [
-          { title: "Real-Time Live Bidding", description: "Bid in real time with sub-second synchronization." },
+          { title: "Real-Time Live Bidding", description: "Follow a live auction and place bids as it progresses." },
           { title: "Item Inspection & Gallery", description: "High-definition media galleries, condition reports, and testing history." },
           { title: "Bid Activity History", description: "Complete transparent bid logs showing competitor bids." },
           { title: "Instant Outbid Alerts", description: "Immediate notifications whenever another bidder places a higher offer." },
         ],
-        services: ["Real-Time Socket Engineering", "Transaction Security & Fraud Prevention", "Auction Mobile Application Design", "Low-Latency Bidding Pipeline"],
+        services: ["Real-Time Socket Engineering", "Auction Transaction Workflows", "Auction Mobile Application Design", "Low-Latency Bidding Pipeline"],
+      },
+    },
+  },
+  {
+    slug: "ledger",
+    mockupColor: "#a44120",
+    icon: ledgerIcon,
+    mockups: [ledger1, ledger2, ledger3, ledger4, ledger5],
+    cardMockups: [ledger1, ledger2],
+    name: "Ledger: Train Harder Bro",
+    nameKu: "Ledger: Train Harder Bro",
+    category: "ڕاهێنانی وەرزشی",
+    badge: "Ledger",
+    tagline: "ڕاهێنانی وەرزشی",
+    description: "ئەپێکی ڕاهێنانی وەرزشی بە یادخستنەوەی بەردەوام و گاڵتەجاڕی لەگەڵت کاتێک ڕاهێنان جێدەهێڵیت.",
+    fullDescription: "Ledger ئەپێکی ڕاهێنانی وەرزشییە کە بە یادخستنەوەی بەردەوام، سێڵفی لەگەڵ کەرەستەی وەرزشی و گاڵتەجاڕی کاتێک ڕۆژێک ڕاهێنان جێدەهێڵیت، هانت دەدات بەردەوام بیت.",
+    features: [],
+    services: [],
+    translations: {
+      ckb: {
+        name: "Ledger: Train Harder Bro",
+        category: "ڕاهێنانی وەرزشی",
+        badge: "Ledger",
+        tagline: "ڕاهێنانی وەرزشی",
+        description: "ڕاهێنان بە یادخستنەوەی بەردەوام و کەمێک گاڵتەجاڕی.",
+        fullDescription: "Ledger ئەپێکی ڕاهێنانی وەرزشییە کە بە یادخستنەوەی بەردەوام، سێڵفی لەگەڵ کەرەستەی وەرزشی و گاڵتەجاڕی کاتێک ڕۆژێک ڕاهێنان جێدەهێڵیت، هانت دەدات بەردەوام بیت.",
+        features: [
+          { title: "یادخستنەوەی بەردەوام", description: "ئاگادارکردنەوەکان بە ئاسانی وازت لێناهێنن." },
+          { title: "سێڵفی ڕاهێنان", description: "سێڵفییەک لەگەڵ دامبڵ یان کەرەستەی وەرزشی بگرە." },
+          { title: "گاڵتەجاڕی", description: "ئەگەر ڕۆژێک ڕاهێنان جێبهێڵیت، ئەپەکە گاڵتەت پێ دەکات." },
+        ],
+        services: [],
+      },
+      ar: {
+        name: "Ledger: Train Harder Bro",
+        category: "تدريب ولياقة",
+        badge: "Ledger",
+        tagline: "تدريب ولياقة",
+        description: "تدريب مع تذكيرات ملحّة وقليل من المزاح.",
+        fullDescription: "Ledger تطبيق للياقة يحثك على الاستمرار بتذكيرات ملحّة، وصورة سيلفي مع معدات التمرين، ومزاح على حسابك عندما تفوّت يوماً.",
+        features: [
+          { title: "تذكيرات ملحّة", description: "إشعارات يصعب تجاهلها لتذكيرك بالتمرين." },
+          { title: "سيلفي التمرين", description: "التقط صورة مع الدمبل أو إحدى معدات النادي." },
+          { title: "مزاح عند الغياب", description: "يفوّتك يوم تمرين؟ التطبيق سيسخر منك قليلاً." },
+        ],
+        services: [],
+      },
+      en: {
+        name: "Ledger: Train Harder Bro",
+        category: "Fitness and training",
+        badge: "Ledger",
+        tagline: "Fitness and training",
+        description: "Training with persistent reminders and a little teasing.",
+        fullDescription: "Ledger keeps you training with persistent, hard-to-dismiss reminders, a selfie with a dumbbell or gym equipment, and a little mockery when you miss a day.",
+        features: [
+          { title: "Persistent reminders", description: "Notifications that keep nudging you to train." },
+          { title: "Workout selfie", description: "Take a selfie with a dumbbell or gym equipment." },
+          { title: "Miss a day?", description: "Expect the app to give you a hard time." },
+        ],
+        services: [],
+      },
+    },
+  },
+  {
+    slug: "soragh",
+    mockupColor: "#ff7520",
+    icon: soraghIcon,
+    mockups: [soragh1, soragh2, soragh3, soragh4, soragh5, soragh6],
+    cardMockups: [soragh1, soragh2],
+    name: "Soragh",
+    nameKu: "سۆراغ",
+    category: "دۆزینەوەی شتە ونبووەکان",
+    badge: "",
+    tagline: "",
+    description: "ئەپێک بۆ گەڕان بەدوای شتە ونبووەکان و بڵاوکردنەوەی شتی دۆزراوە.",
+    fullDescription: "سۆراغ ئەپێکە بۆ بڵاوکردنەوە و گەڕان بەدوای شتە ونبووەکان، و یارمەتیدانی ئەوانەی شتێکیان دۆزیوەتەوە بۆ دۆزینەوەی خاوەنەکەی.",
+    features: [],
+    services: [],
+    translations: {
+      ckb: {
+        name: "سۆراغ (Soragh)",
+        category: "دۆزینەوەی شتە ونبووەکان",
+        badge: "سۆراغ",
+        tagline: "دۆزینەوەی شتە ونبووەکان",
+        description: "بگەڕێ بەدوای شتە ونبووەکان و شتی دۆزراوە بڵاو بکەرەوە.",
+        fullDescription: "سۆراغ ئەپێکە بۆ بڵاوکردنەوە و گەڕان بەدوای شتە ونبووەکان، و یارمەتیدانی ئەوانەی شتێکیان دۆزیوەتەوە بۆ دۆزینەوەی خاوەنەکەی.",
+        features: [
+          { title: "شتی ونبوو", description: "بڵاوکردنەوە و گەڕان بەدوای شتە ونبووەکان." },
+          { title: "شتی دۆزراوە", description: "بڵاوکردنەوەی شتی دۆزراوە بۆ یارمەتیدان لە دۆزینەوەی خاوەنەکەی." },
+          { title: "گەڕان لە نەخشە", description: "بینینی شتەکان لەسەر نەخشە." },
+        ],
+        services: [],
+      },
+      ar: {
+        name: "سوراغ (Soragh)",
+        category: "المفقودات والمعثورات",
+        badge: "سوراغ",
+        tagline: "المفقودات والمعثورات",
+        description: "ابحث عن المفقودات وانشر ما عثرت عليه.",
+        fullDescription: "سوراغ تطبيق لنشر المفقودات والبحث عنها، ولمساعدة من يجد شيئاً على الوصول إلى صاحبه.",
+        features: [
+          { title: "المفقودات", description: "انشر عن الأشياء المفقودة وابحث عنها." },
+          { title: "المعثورات", description: "انشر ما عثرت عليه للمساعدة في إيجاد صاحبه." },
+          { title: "الخريطة", description: "استعرض الأشياء على الخريطة." },
+        ],
+        services: [],
+      },
+      en: {
+        name: "Soragh",
+        category: "Lost and found",
+        badge: "Soragh",
+        tagline: "Lost and found",
+        description: "Search for lost items and post items you have found.",
+        fullDescription: "Soragh is an app for posting and searching for lost items, and helping people who find something reach its owner.",
+        features: [
+          { title: "Lost items", description: "Post about and search for lost belongings." },
+          { title: "Found items", description: "Post what you have found to help locate its owner." },
+          { title: "Map", description: "Explore items on a map." },
+        ],
+        services: [],
       },
     },
   },

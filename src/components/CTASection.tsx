@@ -1,57 +1,13 @@
 "use client";
-
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import AnimatedSection from "./AnimatedSection";
+import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/i18n/context";
-
 export default function CTASection() {
   const { t, dir } = useLanguage();
-
+  const Arrow = dir === "rtl" ? ArrowUpLeft : ArrowUpRight;
   return (
-    <section className="py-16 sm:py-20 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection>
-          <div className="relative bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl sm:rounded-2xl overflow-hidden">
-            <div className="flex flex-col md:flex-row items-center">
-              {/* Image gradient area */}
-              <div className="hidden md:block md:w-2/5 h-64 md:h-auto relative">
-                <div
-                  className={`absolute inset-0 z-10 ${
-                    dir === "rtl"
-                      ? "bg-gradient-to-l from-[var(--color-bg-card)] to-transparent"
-                      : "bg-gradient-to-r from-[var(--color-bg-card)] to-transparent"
-                  }`}
-                />
-                <div
-                  className="w-full h-full min-h-[280px]"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%)",
-                  }}
-                />
-              </div>
-
-              {/* Content */}
-              <div className="flex-1 p-8 sm:p-10 md:p-16 text-center md:text-start">
-                <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">
-                  {t.cta.badge}
-                </span>
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-2 sm:mt-3 mb-5 sm:mb-6 text-[var(--color-text)] leading-tight">
-                  {t.cta.title}
-                </h2>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 border border-[var(--color-border)] text-[var(--color-text)] px-6 sm:px-8 py-3 rounded-full text-sm font-medium hover:bg-[var(--color-bg-secondary)] transition-colors touch-manipulation"
-                >
-                  <span>{t.cta.button}</span>
-                  {dir === "ltr" ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-      </div>
+    <section className="site-container contact-strip">
+      <Link href="/contact"><span>{t.nav.contact}</span><Arrow strokeWidth={1.25} aria-hidden="true" /></Link>
     </section>
   );
 }

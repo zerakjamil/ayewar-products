@@ -4,18 +4,26 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import ProductDetailView from "@/components/ProductDetailView";
+import type { Metadata, ResolvingMetadata } from "next";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
   const { slug } = await params;
   const product = products.find((p) => p.slug === slug);
   if (!product) return {};
+  const inherited = await parent;
+  const title = `${product.translations.en.name} — Ayewar`;
+  const description = product.translations.en.description;
   return {
-    title: `${product.name} | ئەیوار`,
-    description: product.description,
+    title,
+    description,
+    openGraph: { title, description, type: "website", siteName: "Ayewar", images: inherited.openGraph?.images },
+    twitter: { title, description, card: "summary_large_image", images: inherited.twitter?.images },
   };
 }
 
@@ -29,11 +37,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const nextProduct = products[(productIndex + 1) % products.length];
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg)]">
+    <>
       <Navbar />
+      <main id="main-content" tabIndex={-1}>
       <ProductDetailView product={product} prevProduct={prevProduct} nextProduct={nextProduct} />
       <CTASection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

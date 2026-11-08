@@ -1,7 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 import { Locale, Translations, translations } from "./translations";
+import { MotionConfig } from "framer-motion";
 
 interface LanguageContextType {
   locale: Locale;
@@ -19,21 +20,32 @@ const LanguageContext = createContext<LanguageContextType>({
   mounted: false,
 });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("ckb");
-  const [mounted, setMounted] = useState(false);
+let memoryLocale: Locale = "ckb";
+function getLocale(): Locale {
+  try {
+    const saved = localStorage.getItem("ayewar_locale");
+    if (saved === "ckb" || saved === "ar" || saved === "en") return saved;
+  } catch { /* The in-memory preference remains available. */ }
+  return memoryLocale;
+}
+function subscribe(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener("ayewar-language", onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener("ayewar-language", onChange);
+  };
+}
+const subscribeMounted = () => () => {};
 
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("ayewar_locale") as Locale;
-    if (saved && (saved === "ckb" || saved === "ar" || saved === "en")) {
-      setLocaleState(saved);
-    }
-  }, []);
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const locale = useSyncExternalStore(subscribe, getLocale, () => "ckb" as Locale);
+  const mounted = useSyncExternalStore(subscribeMounted, () => true, () => false);
 
   const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale);
-    localStorage.setItem("ayewar_locale", newLocale);
+    memoryLocale = newLocale;
+    try { localStorage.setItem("ayewar_locale", newLocale); } catch { /* Keep language switching available when storage is blocked. */ }
+    window.dispatchEvent(new Event("ayewar-language"));
   };
 
   const dir: "rtl" | "ltr" = locale === "en" ? "ltr" : "rtl";
@@ -56,7 +68,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       <div dir={dir} className={dir === "ltr" ? "font-sans ltr" : "font-sans rtl"}>
-        {children}
+        <MotionConfig reducedMotion="user">{children}</MotionConfig>
       </div>
     </LanguageContext.Provider>
   );

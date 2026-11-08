@@ -7,6 +7,22 @@ export interface Translations {
     about: string;
     contact: string;
     githubLabel: string;
+    play: string;
+  };
+  gallery: {
+    gallery: string;
+    fullscreenBtn: string;
+    fullscreenShort: string;
+    screenshotMode: string;
+    deviceMode: string;
+    close: string;
+    previous: string;
+    next: string;
+    play: string;
+    pause: string;
+    nativeFullscreen: string;
+    screen: string;
+    goToScreen: string;
   };
   hero: {
     title: string;
@@ -96,6 +112,22 @@ export const translations: Record<Locale, Translations> = {
       about: "دەربارە",
       contact: "پەیوەندی",
       githubLabel: "گیت‌هەب",
+      play: "یاری بکە",
+    },
+    gallery: {
+      gallery: "پێش‌نمایشی ڕووکارەکان",
+      fullscreenBtn: "پێش‌نمایشی تەواوی شاشە",
+      fullscreenShort: "تەواوی شاشە",
+      screenshotMode: "وێنەی ئەپ",
+      deviceMode: "چوارچێوەی مۆبایل",
+      close: "داخستن",
+      previous: "ڕووکاری پێشوو",
+      next: "ڕووکاری دواتر",
+      play: "دەستپێکردنی گۆڕینی خۆکار",
+      pause: "ڕاگرتنی گۆڕینی خۆکار",
+      nativeFullscreen: "گۆڕینی دۆخی تەواوی شاشە",
+      screen: "ڕووکار",
+      goToScreen: "بڕۆ بۆ ڕووکاری",
     },
     hero: {
       title: "بەرهەمە داهێنەرانە و پلاتفۆرمە مۆبایلە پێشکەوتووەکان",
@@ -121,10 +153,10 @@ export const translations: Record<Locale, Translations> = {
       },
     },
     filters: {
-      all: "هەموو بەرهەمەکان (All)",
-      transit: "هاتوچۆ و لۆجستیک (Transit)",
-      services: "خزمەتگوزاری و بازرگانی (Services)",
-      realtime: "کاتی ڕاستەوخۆ و یاری (Real-Time)",
+      all: "هەموو",
+      transit: "هاتوچۆ",
+      services: "خزمەتگوزاری",
+      realtime: "یاری و مزادە",
     },
     card: {
       readMore: "زیاتر بخوێنەرەوە",
@@ -199,6 +231,22 @@ export const translations: Record<Locale, Translations> = {
       about: "من نحن",
       contact: "اتصل بنا",
       githubLabel: "جيت هاب",
+      play: "العب",
+    },
+    gallery: {
+      gallery: "معرض الواجهات",
+      fullscreenBtn: "عرض بملء الشاشة",
+      fullscreenShort: "ملء الشاشة",
+      screenshotMode: "واجهة التطبيق",
+      deviceMode: "إطار الهاتف",
+      close: "إغلاق",
+      previous: "الواجهة السابقة",
+      next: "الواجهة التالية",
+      play: "بدء العرض التلقائي",
+      pause: "إيقاف العرض التلقائي",
+      nativeFullscreen: "تبديل وضع ملء الشاشة",
+      screen: "الواجهة",
+      goToScreen: "انتقل إلى الواجهة",
     },
     hero: {
       title: "منتجات مبتكرة ومنصات جوال متطورة",
@@ -224,10 +272,10 @@ export const translations: Record<Locale, Translations> = {
       },
     },
     filters: {
-      all: "جميع المنتجات (All)",
-      transit: "النقل واللوجستيات (Transit)",
-      services: "الخدمات والأعمال (Services)",
-      realtime: "الوقت الفعلي والألعاب (Real-Time)",
+      all: "الكل",
+      transit: "النقل",
+      services: "الخدمات",
+      realtime: "الألعاب والمزادات",
     },
     card: {
       readMore: "اقرأ المزيد",
@@ -302,6 +350,22 @@ export const translations: Record<Locale, Translations> = {
       about: "About",
       contact: "Contact",
       githubLabel: "GitHub",
+      play: "Play",
+    },
+    gallery: {
+      gallery: "Screen gallery",
+      fullscreenBtn: "Full Screen Preview",
+      fullscreenShort: "Full Screen",
+      screenshotMode: "App View",
+      deviceMode: "Phone Frame",
+      close: "Close",
+      previous: "Previous screen",
+      next: "Next screen",
+      play: "Start autoplay",
+      pause: "Pause autoplay",
+      nativeFullscreen: "Toggle native fullscreen",
+      screen: "Screen",
+      goToScreen: "Go to screen",
     },
     hero: {
       title: "Innovative Products & Advanced Mobile Platforms",
@@ -327,10 +391,10 @@ export const translations: Record<Locale, Translations> = {
       },
     },
     filters: {
-      all: "All Products",
-      transit: "Transit & Fleet",
-      services: "Services & Commerce",
-      realtime: "Real-Time & Gaming",
+      all: "All",
+      transit: "Transit",
+      services: "Services",
+      realtime: "Games & auctions",
     },
     card: {
       readMore: "Read More",

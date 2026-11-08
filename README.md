@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ayewar
 
-## Getting Started
+A product portfolio built with Next.js App Router, React, TypeScript, Tailwind CSS, and Framer Motion. The interface supports Central Kurdish (`ckb`), Arabic (`ar`), and English (`en`).
 
-First, run the development server:
+## Run
 
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Use the language selector to change languages; the preference persists locally when browser storage is available.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validate
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run lint
+npm test
+npm run build
+```
 
-## Learn More
+With a development or production server running:
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+npm run test:smoke
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set `SITE_URL` to test a different local server. The smoke checks verify the eight product routes, navigation and page landmarks, focusable skip-link destinations, missing-product responses, contact form semantics, and branded home/product sharing metadata with fetchable preview images and icons. They do not replace browser checks for filtering, mobile navigation, language persistence, or modal focus behavior. `npm test` checks unique product slugs, nonempty source assets, and nested translation parity without requiring a server or importing application code. The build remains a separate command.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
+- `src/components/Portfolio.tsx`: shared homepage and product index, with in-memory filtering.
+- `src/data/products.ts`: product identities, existing screenshots, and localized content.
+- `src/i18n/translations.ts`: shared interface translations.
+- `src/i18n/context.tsx`: language preference and document direction.
+- `src/app/globals.css`: shared colors, layout, interaction states, and reduced-motion rules.
+- `src/components/PhoneCarousel.tsx`: detailed screenshot gallery and native modal preview.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Product links remain ordinary links and are present in the server-rendered HTML. Filters use `aria-pressed`, navigation uses `aria-current`, and form fields have explicit labels.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+
+The contact form prepares a message addressed to `info@ayewar.com` in the visitor's email application. The visitor must send it there. A native mail form fallback is present before JavaScript loads, using POST to the email application rather than submitting personal fields in the page URL. There is no contact API, server-side inquiry storage, or webhook delivery in this checkout. The direct email link remains available if the visitor does not use the form.
+
+## Visual direction
+
+The product screenshots carry the color and detail. The surrounding interface uses black surfaces, white actions, neutral gray borders and text, aligned typography, and minimal copy. The index uses static previews; interactive galleries live on product pages and start paused. Shared loading placeholders follow the index layout.
+
+The browser title is “Ayewar — Apps & Games”. Favicons use the symbol from the same Ayewar lockup as the header; the 1200×630 Open Graph and Twitter cards use that full lockup on black. These assets are local, so a link-preview crawler does not need JavaScript or an external image service. Production defaults to `https://products.ayewar.com`; `NEXT_PUBLIC_SITE_URL` overrides that origin when building for another host (see `.env.example`). Vercel's deployment origin is used automatically when available. Local development uses localhost.
+
+## Review
+
+Before publishing, verify desktop and narrow mobile widths in all three languages. Check filter membership, keyboard focus, the mobile menu's Escape behavior, gallery arrows and modal dismissal, and email preparation. Delivery through an installed email application requires a manual check on that device.
+
+
+The optional `/play` district uses Three.js and cannon-es. The bus loads from [Polyfork](https://github.com/lucas-martinic/polyfork-catalog); its free models are hosted by Polyfork under its separate license and are not redistributed here. The locally bundled buildings, tree, sedan, and character are Kenney CC0 models from [Hidencod/tge-assets](https://github.com/Hidencod/tge-assets), from the City Kit Suburban, Nature Kit, Car Kit, and Mini Characters packs. Discovery audio is synthesized in the browser and is off until enabled.
+
+The district’s road paths and fixed-step simulation clock live in `src/game/district.mjs`. Traffic follows two independently authored loops; its heading follows each road segment. Polyfork’s hosted Easter Island and Sky Town terrain models and a water tower are optional scenery; the playable island and vehicle have local fallbacks if the remote assets cannot load.
+
+Driving uses screen-relative arrows/WASD, normalized diagonal input, automatic steering and braking on release; Space or the center touch control applies the brake. `DistrictEngine.ts` handles the scene/physics lifecycle, while `district.mjs` holds the fixed-step clock, route data and controller math. The tests check all scenery footprints against both roads and their connecting segments.

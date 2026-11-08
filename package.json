@@ -6,14 +6,21 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node scripts/verify-invariants.mjs && node --test scripts/district.test.mjs",
+    "inquiries": "node scripts/list-inquiries.mjs",
+    "test:smoke": "node --test scripts/site-smoke.test.mjs"
   },
   "dependencies": {
+    "@types/three": "^0.187.0",
+    "@xyflow/react": "^12.12.1",
+    "cannon-es": "^0.20.0",
     "framer-motion": "^12.33.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "three": "^0.187.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -7,53 +7,56 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { useLanguage } from "@/i18n/context";
 
 export default function ContactPage() {
-  const { t } = useLanguage();
-  const [formData, setFormData] = useState({
-    reason: "",
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const { t, locale } = useLanguage();
+  const [prepared, setPrepared] = useState(false);
+  const labels = {
+    ckb: { action: "ئیمەیڵ ئامادە بکە", prepared: "نامەکەت لە ئەپی ئیمەیڵەکەت تەواو بکە و بینێرە.", messageRequired: "تکایە نامەیەک بنووسە.", direct: "info@ayewar.com" },
+    ar: { action: "تحضير البريد", prepared: "أكمل إرسال الرسالة من تطبيق البريد لديك.", messageRequired: "يرجى كتابة رسالة.", direct: "info@ayewar.com" },
+    en: { action: "Prepare email", prepared: "Finish and send your message in your email app.", messageRequired: "Enter a message.", direct: "info@ayewar.com" },
+  }[locale];
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const fields = new FormData(e.currentTarget);
+    const formData = Object.fromEntries(["reason", "name", "email", "phone", "message"].map((key) => [key, String(fields.get(key) ?? "").trim()]));
+    const message = e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement;
+    if (!formData.message) {
+      message.setCustomValidity(labels.messageRequired);
+      message.reportValidity();
+      return;
+    }
+    const subject = encodeURIComponent(`Ayewar: ${t.contact.reasons[formData.reason as keyof typeof t.contact.reasons]}`);
+    const body = encodeURIComponent(`${formData.message.trim()}\n\n${formData.name.trim()}\n${formData.email.trim()}${formData.phone.trim() ? `\n${formData.phone.trim()}` : ""}`);
+    window.location.href = `mailto:info@ayewar.com?subject=${subject}&body=${body}`;
+    setPrepared(true);
   };
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg)]">
+    <>
       <Navbar />
+      <main id="main-content" tabIndex={-1}>
 
-      <section className="pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-12 sm:py-20">
+        <div className="site-container max-w-3xl">
           <AnimatedSection>
             <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16">
               <div className="text-center mb-8 sm:mb-10">
-                <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">
-                  {t.contact.badge}
-                </span>
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-2 sm:mt-3 text-[var(--color-text)] leading-tight px-2">
-                  {t.contact.title}
+                  {t.nav.contact}
                 </h1>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <form action="mailto:info@ayewar.com" method="post" encType="text/plain" onSubmit={handleSubmit} onInput={() => setPrepared(false)} className="space-y-5 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                    <label htmlFor="contact-reason" className="block text-sm font-medium text-[var(--color-text)] mb-2">
                       {t.contact.reason}
                     </label>
                     <select
+                      id="contact-reason"
+                      required
                       name="reason"
-                      value={formData.reason}
-                      onChange={handleChange}
-                      className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors appearance-none touch-manipulation"
+                      defaultValue=""
+                      className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors touch-manipulation"
                     >
                       <option value="">{t.contact.selectReason}</option>
                       <option value="project">{t.contact.reasons.project}</option>
@@ -64,77 +67,88 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                    <label htmlFor="contact-name" className="block text-sm font-medium text-[var(--color-text)] mb-2">
                       {t.contact.name}
                     </label>
                     <input
+                      id="contact-name"
+                      required
+                      autoComplete="name"
+                      pattern={".*\\S.*"}
+                      maxLength={120}
                       type="text"
                       name="name"
-                      placeholder={t.contact.namePlaceholder}
-                      value={formData.name}
-                      onChange={handleChange}
                       className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors touch-manipulation"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                    <label htmlFor="contact-email" className="block text-sm font-medium text-[var(--color-text)] mb-2">
                       {t.contact.email}
                     </label>
                     <input
+                      id="contact-email"
+                      required
+                      autoComplete="email"
+                      maxLength={254}
+                      dir="ltr"
                       type="email"
                       name="email"
                       placeholder="name@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
                       className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors touch-manipulation"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                    <label htmlFor="contact-phone" className="block text-sm font-medium text-[var(--color-text)] mb-2">
                       {t.contact.phone}
                     </label>
                     <input
+                      id="contact-phone"
+                      autoComplete="tel"
+                      maxLength={40}
+                      dir="ltr"
                       type="tel"
                       name="phone"
                       placeholder="+964 XXX XXX XXXX"
-                      value={formData.phone}
-                      onChange={handleChange}
                       className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors touch-manipulation"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-[var(--color-text)] mb-2">
                     {t.contact.message}
                   </label>
                   <textarea
+                    id="contact-message"
+                    required
+                    maxLength={3000}
+                    onInput={(event) => event.currentTarget.setCustomValidity("")}
                     name="message"
                     rows={6}
-                    placeholder={t.contact.messagePlaceholder}
-                    value={formData.message}
-                    onChange={handleChange}
                     className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors resize-none touch-manipulation"
                   />
                 </div>
 
-                <div className="flex justify-end">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <a href="mailto:info@ayewar.com" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)]" dir="ltr">{labels.direct}</a>
                   <button
                     type="submit"
-                    className="w-full sm:w-auto bg-[var(--color-accent)] text-white px-8 py-3.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity touch-manipulation"
+                    className="w-full sm:w-auto bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-4 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity touch-manipulation"
                   >
-                    {t.contact.submit}
+                    {labels.action}
                   </button>
                 </div>
+                {prepared && <p role="status" className="text-sm text-[var(--color-accent)]">{labels.prepared}</p>}
               </form>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

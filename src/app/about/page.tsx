@@ -10,19 +10,17 @@ export default function AboutPage() {
   const { t } = useLanguage();
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg)]">
+    <>
       <Navbar />
+      <main id="main-content" tabIndex={-1}>
 
-      <section className="pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+      <section className="py-16 sm:py-24">
+        <div className="site-container max-w-3xl text-start">
           <AnimatedSection>
-            <span className="text-[var(--color-accent)] text-xs sm:text-sm font-medium">
-              {t.about.badge}
-            </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-2 sm:mt-3 mb-5 sm:mb-6 text-[var(--color-text)] leading-tight px-2">
-              {t.about.title}
+            <h1 className="page-title mb-6">
+              {t.nav.about}
             </h1>
-            <p className="text-[var(--color-text-muted)] text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-2">
+            <p className="page-copy">
               {t.about.description}
             </p>
           </AnimatedSection>
@@ -30,7 +28,8 @@ export default function AboutPage() {
       </section>
 
       <CTASection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
