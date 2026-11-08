@@ -64,3 +64,12 @@ The optional `/play` district uses Three.js and cannon-es. The bus loads from [P
 The district’s road paths and fixed-step simulation clock live in `src/game/district.mjs`. Traffic follows two independently authored loops; its heading follows each road segment. Polyfork’s hosted Easter Island and Sky Town terrain models and a water tower are optional scenery; the playable island and vehicle have local fallbacks if the remote assets cannot load.
 
 Driving uses screen-relative arrows/WASD, normalized diagonal input, automatic steering and braking on release; Space or the center touch control applies the brake. `DistrictEngine.ts` handles the scene/physics lifecycle, while `district.mjs` holds the fixed-step clock, route data and controller math. The tests check all scenery footprints against both roads and their connecting segments.
+
+
+## Automatic production updates
+
+Push to `main`. The `Ayewar CI` workflow checks lint, tests, the production build and HTTP smoke tests. The `ayewar` server deploys the exact passing commit and publishes `deploy/ayewar` on GitHub; a green CI run alone does not mean deployment has finished. The server normally checks once a minute and keeps its prior image for rollback.
+
+Production uses the checked-in standalone Dockerfile. Environment files stay on the server and are supplied as BuildKit secrets and read-only runtime mounts. Server source edits block deployment. Changing production environment files or applying database migrations is an explicit server operation, not an automatic consequence of pushing code.
+
+Server status: `python3 ~/.local/lib/ayewar-deploy/deploy.py status`. Logs: `sudo journalctl -u ayewar-deploy.service --since today`. Shared tooling and cross-project rollout evidence live in the private `zerakjamil/server-migration` repository under `automation/`.
