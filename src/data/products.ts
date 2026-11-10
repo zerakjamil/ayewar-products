@@ -65,6 +65,7 @@ import raiders4 from "@/assets/mockup/raiders/mockup-4.png";
 import raiders5 from "@/assets/mockup/raiders/mockup-5.png";
 import raiders6 from "@/assets/mockup/raiders/mockup-6.png";
 import raiders7 from "@/assets/mockup/raiders/mockup-7.png";
+import raiders8 from "@/assets/mockup/raiders/mockup-8.png";
 
 // Students mockups (6)
 import students1 from "@/assets/mockup/students/mockup-1.png";
@@ -412,7 +413,8 @@ export const products: Product[] = [
     slug: "raiders",
     mockupColor: "#7C3AED",
     icon: raidersIcon,
-    mockups: [raiders1, raiders2, raiders3, raiders4, raiders5, raiders6, raiders7],
+    mockups: [raiders1, raiders2, raiders8, raiders4, raiders3, raiders5, raiders6, raiders7],
+    cardMockups: [raiders4, raiders5],
     name: "Ayewar Raiders",
     nameKu: "Ayewar Raiders",
     category: "پلاتفۆرمی هات و چۆ بۆ شۆفێری پاسەکانی کوردستان",
